@@ -19,8 +19,22 @@ from utils import accuracy
 from models import *
 from dataset import *
 
+USE_GPU = True
+device = None
+data_root_train = os.path.join('..', '..', 'dataset')  # path to train images
+data_root_test = os.path.join('..', '..', 'dataset')  # path to test images
+train_file = os.path.join('..', '..', 'dataset', 'train2019.json')
+val_file = os.path.join('..', '..', 'dataset', 'val2019.json')
+test_file = os.path.join('..', '..', 'dataset', 'test2019.json')
+
 
 def main():
+    global device
+    if USE_GPU and torch.cuda.is_available():
+        device = torch.device('cuda')
+    else:
+        device = torch.device('cpu')
+
     parser = OptionParser()
     parser.add_option('-j', '--workers', dest='workers', default=16, type='int',
                       help='number of data loading workers (default: 16)')
@@ -59,7 +73,7 @@ def main():
     net = WSDAN(num_classes=num_classes, M=num_attentions, net=feature_net)
 
     # feature_center: size of (#classes, #attention_maps, #channel_features)
-    feature_center = torch.zeros(num_classes, num_attentions, net.num_features * net.expansion).to(torch.device("cuda"))
+    feature_center = torch.zeros(num_classes, num_attentions, net.num_features * net.expansion).to(device)
 
     if options.ckpt:
         ckpt = options.ckpt
@@ -79,7 +93,7 @@ def main():
 
         # load feature center
         if 'feature_center' in checkpoint:
-            feature_center = checkpoint['feature_center'].to(torch.device("cuda"))
+            feature_center = checkpoint['feature_center'].to(device)
             logging.info('feature_center loaded from {}'.format(options.ckpt))
 
     ##################################
@@ -93,14 +107,15 @@ def main():
     # Use cuda
     ##################################
     cudnn.benchmark = True
-    net.to(torch.device("cuda"))
+    net.to(device)
     net = nn.DataParallel(net)
 
     ##################################
     # Load dataset
     ##################################
-    train_dataset, validate_dataset = CustomDataset(phase='train', shape=image_size), \
-                                      CustomDataset(phase='val'  , shape=image_size)
+
+    train_dataset, validate_dataset = INAT(data_root_train, train_file, is_train=True), \
+                                      INAT(data_root_train, val_file, is_train=False)
 
     train_loader, validate_loader = DataLoader(train_dataset, batch_size=options.batch_size, shuffle=True,
                                                num_workers=options.workers, pin_memory=True), \
@@ -176,8 +191,8 @@ def train(**kwargs):
         batch_start = time.time()
 
         # obtain data for training
-        X = X.to(torch.device("cuda"))
-        y = y.to(torch.device("cuda"))
+        X = X.to(device)
+        y = y.to(device)
 
         ##################################
         # Raw Image
@@ -317,8 +332,8 @@ def validate(**kwargs):
             batch_start = time.time()
 
             # obtain data
-            X = X.to(torch.device("cuda"))
-            y = y.to(torch.device("cuda"))
+            X = X.to(device)
+            y = y.to(device)
 
             ##################################
             # Raw Image

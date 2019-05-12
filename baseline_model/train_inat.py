@@ -36,7 +36,7 @@ class Params:
     data_root_test = '../../dataset/'       # path to test images
 
     # set evaluate to True to run the test set
-    evaluate = True
+    evaluate = False
     save_preds = True
     op_file_name = 'submission.csv' # submission file
     if evaluate:
@@ -94,7 +94,7 @@ def main():
     # data loading code
     train_dataset = inat2018_loader.INAT(args.data_root_train, args.train_file,
                      is_train=True)
-    val_dataset = inat2018_loader.INAT(args.data_root_test, args.val_file,
+    val_dataset = inat2018_loader.INAT(args.data_root_train, args.val_file,
                      is_train=False)
 
     train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=args.batch_size,
