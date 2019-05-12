@@ -114,8 +114,8 @@ def main():
     # Load dataset
     ##################################
 
-    train_dataset, validate_dataset = INAT(data_root_train, train_file, is_train=True), \
-                                      INAT(data_root_train, val_file, is_train=False)
+    train_dataset, validate_dataset = INAT(data_root_train, train_file, , image_size, is_train=True), \
+                                      INAT(data_root_train, val_file, image_size, is_train=False)
 
     train_loader, validate_loader = DataLoader(train_dataset, batch_size=options.batch_size, shuffle=True,
                                                num_workers=options.workers, pin_memory=True), \
