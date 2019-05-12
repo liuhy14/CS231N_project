@@ -65,7 +65,7 @@ def main():
     # Initialize model
     ##################################
     image_size = (512, 512)
-    num_classes = 1000
+    num_classes = 1010
     num_attentions = 32
     start_epoch = 0
 
@@ -213,7 +213,7 @@ def train(**kwargs):
 
         # metrics: top-1, top-3, top-5 error
         with torch.no_grad():
-            epoch_acc[0] += accuracy(y_pred, y, topk=(1, 3, 5))
+            epoch_acc[0] = epoch_acc[0] + accuracy(y_pred, y, topk=(1, 3, 5))
 
         ##################################
         # Attention Cropping
@@ -244,7 +244,7 @@ def train(**kwargs):
 
         # metrics: top-1, top-3, top-5 error
         with torch.no_grad():
-            epoch_acc[1] += accuracy(y_pred, y, topk=(1, 3, 5))
+            epoch_acc[1] = epoch_acc[1] + accuracy(y_pred, y, topk=(1, 3, 5))
 
         ##################################
         # Attention Dropping
@@ -267,7 +267,7 @@ def train(**kwargs):
 
         # metrics: top-1, top-3, top-5 error
         with torch.no_grad():
-            epoch_acc[2] += accuracy(y_pred, y, topk=(1, 3, 5))
+            epoch_acc[2] = epoch_acc[2] + accuracy(y_pred, y, topk=(1, 3, 5))
 
         # end of this batch
         batches += 1
