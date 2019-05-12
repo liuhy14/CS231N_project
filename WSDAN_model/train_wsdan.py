@@ -135,7 +135,7 @@ def main():
     ##################################
     # TRAINING
     ##################################
-    logging.info('Start training: Total epochs: {}, Batch size: {}, Training size: {}, Validation size: {}'.
+    logging.info('\nStart training: Total epochs: {}, Batch size: {}, Training size: {}, Validation size: {}'.
                  format(options.epochs, options.batch_size, len(train_dataset), len(validate_dataset)))
 
     for epoch in range(start_epoch, options.epochs):
@@ -273,7 +273,7 @@ def train(**kwargs):
         batches += 1
         batch_end = time.time()
         if (i + 1) % verbose == 0:
-            logging.info('\tBatch %d: (Raw) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Crop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Drop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), Time %3.2f' %
+            logging.info('\n\tBatch %d: (Raw) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Crop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Drop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), Time %3.2f' %
                          (i + 1,
                           epoch_loss[0] / batches, epoch_acc[0, 0] / batches, epoch_acc[0, 1] / batches, epoch_acc[0, 2] / batches,
                           epoch_loss[1] / batches, epoch_acc[1, 0] / batches, epoch_acc[1, 1] / batches, epoch_acc[1, 2] / batches,
