@@ -30,17 +30,17 @@ class Params:
     print_freq = 100
 
     resume = 'checkpoint.pth.tar'                    # set this to path of model to resume training
-    train_file = '../dataset/train2019.json'
-    val_file = '../dataset/val2019.json'
-    data_root_train = '../dataset/' # path to train images
-    data_root_test = '../dataset/'       # path to test images
+    train_file = '../../dataset/train2019.json'
+    val_file = '../../dataset/val2019.json'
+    data_root_train = '../../dataset/' # path to train images
+    data_root_test = '../../dataset/'       # path to test images
 
     # set evaluate to True to run the test set
     evaluate = True
     save_preds = True
     op_file_name = 'submission.csv' # submission file
     if evaluate:
-        val_file = '../dataset/test2019.json'
+        val_file = '../../dataset/test2019.json'
 
 best_prec3 = 0.0  # store current best top 3
 
