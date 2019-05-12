@@ -187,7 +187,7 @@ def train(**kwargs):
     start_time = time.time()
     logging.info('Epoch %03d, Learning Rate %g' % (epoch + 1, optimizer.param_groups[0]['lr']))
     net.train()
-    for i, (X, y) in enumerate(data_loader):
+    for i, (X, _, y, _) in enumerate(data_loader):
         batch_start = time.time()
 
         # obtain data for training

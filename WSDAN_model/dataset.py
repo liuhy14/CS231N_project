@@ -86,7 +86,7 @@ class INAT(data.Dataset):
         self.norm_aug = transforms.Normalize(mean=self.mu_data, std=self.std_data)
 
     def __getitem__(self, index):
-        path = self.root + self.imgs[index]
+        path = os.path.join(self.root, self.imgs[index])
         im_id = self.ids[index]
         img = self.loader(path)
         species_id = self.classes[index]
