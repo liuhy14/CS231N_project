@@ -305,7 +305,7 @@ def train(**kwargs):
         tbx.add_scalar('train/crop_top3_acc', epoch_acc[1, 2] / batches, step)
         tbx.add_scalar('train/drop_top1_acc', epoch_acc[2, 0] / batches, step)
         tbx.add_scalar('train/drop_top2_acc', epoch_acc[2, 1] / batches, step)
-        tbx.add_scalar('train/crop_top3_acc', epoch_acc[2, 2] / batches, step)
+        tbx.add_scalar('train/drop_top3_acc', epoch_acc[2, 2] / batches, step)
 
         if (i + 1) % verbose == 0:
             logging.info('\n\tBatch %d: (Raw) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Crop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Drop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), Time %3.2f' %
