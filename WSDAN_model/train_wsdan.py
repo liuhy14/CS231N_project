@@ -149,7 +149,7 @@ def main():
                  format(options.epochs, options.batch_size, len(train_dataset), len(validate_dataset)))
 
     for epoch in range(start_epoch, options.epochs):
-        train(epoch=epoch,
+        step = train(epoch=epoch,
               step=step,
               batch_size=options.batch_size,
               data_loader=train_loader,
@@ -162,7 +162,6 @@ def main():
               verbose=options.verbose,
               tbx=tbx)
         val_loss = validate(epoch=epoch,
-                            step=step,
                             data_loader=validate_loader,
                             net=net,
                             feature_center=feature_center,
@@ -345,6 +344,7 @@ def train(**kwargs):
                   epoch_loss[1], epoch_acc[1, 0], epoch_acc[1, 1], epoch_acc[1, 2],
                   epoch_loss[2], epoch_acc[2, 0], epoch_acc[2, 1], epoch_acc[2, 2],
                   end_time - start_time))
+    return step
 
 
 def validate(**kwargs):
