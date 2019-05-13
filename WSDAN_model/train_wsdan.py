@@ -44,7 +44,7 @@ def main():
 
     parser = OptionParser()
     parser.add_option('-j', '--workers', dest='workers', default=16, type='int',
-                      help='number of data loading workers (default: 16)')
+                      help='number of data loading workers (default: 8)')
     parser.add_option('-e', '--epochs', dest='epochs', default=80, type='int',
                       help='number of epochs (default: 80)')
     parser.add_option('-b', '--batch-size', dest='batch_size', default=16, type='int',
@@ -130,7 +130,7 @@ def main():
 
     train_loader, validate_loader = DataLoader(train_dataset, batch_size=options.batch_size, shuffle=True,
                                                num_workers=options.workers, pin_memory=True), \
-                                    DataLoader(validate_dataset, batch_size=options.batch_size * 4, shuffle=False,
+                                    DataLoader(validate_dataset, batch_size=options.batch_size, shuffle=False,
                                                num_workers=options.workers, pin_memory=True)
 
     optimizer = torch.optim.SGD(net.parameters(), lr=options.lr, momentum=0.9, weight_decay=0.00001)
@@ -404,10 +404,10 @@ def validate(**kwargs):
 
             # loss
             batch_loss = loss(y_pred, y)
-            epoch_loss += batch_loss.item()
+            epoch_loss = epoch_loss + batch_loss.item()
 
             # metrics: top-1, top-3, top-5 error
-            epoch_acc += accuracy(y_pred, y, topk=(1, 3, 5))
+            epoch_acc = epoch_acc + accuracy(y_pred, y, topk=(1, 3, 5))
 
             # end of this batch
             batches += 1
@@ -425,7 +425,7 @@ def validate(**kwargs):
     epoch_loss /= batches
     epoch_acc /= batches
 
-    tbx.add_scalar('val/loss', epoch_loss[0], epoch)
+    tbx.add_scalar('val/loss', epoch_loss, epoch)
     tbx.add_scalar('val/top1_acc', epoch_acc[0], epoch)
     tbx.add_scalar('val/top2_acc', epoch_acc[1], epoch)
     tbx.add_scalar('val/top3_acc', epoch_acc[2], epoch)
