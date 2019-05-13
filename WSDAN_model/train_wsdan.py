@@ -14,6 +14,7 @@ import torch.nn.functional as F
 import torch.backends.cudnn as cudnn
 from torch.utils.data import DataLoader
 from optparse import OptionParser
+from tensorboardX import SummaryWriter
 
 from utils import accuracy
 from models import *
@@ -75,6 +76,8 @@ def main():
     num_classes = 1010
     num_attentions = 32
     start_epoch = 0
+    step = 0
+    tbx = SummaryWriter('./output/tensorboard')
 
     feature_net = inception_v3(pretrained=True)
     net = WSDAN(num_classes=num_classes, M=num_attentions, net=feature_net)
@@ -91,6 +94,7 @@ def main():
 
         if not options.initial_training:
             start_epoch = checkpoint['epoch']
+            step = checkpoint['step']
         best_top1_val_accuracy = checkpoint['best_top1_val_accuracy']
 
         # Load weights
@@ -146,6 +150,8 @@ def main():
 
     for epoch in range(start_epoch, options.epochs):
         train(epoch=epoch,
+              step=step,
+              batch_size=options.batch_size,
               data_loader=train_loader,
               net=net,
               feature_center=feature_center,
@@ -153,28 +159,34 @@ def main():
               optimizer=optimizer,
               save_freq=options.save_freq,
               save_dir=options.save_dir,
-              verbose=options.verbose)
+              verbose=options.verbose,
+              tbx=tbx)
         val_loss = validate(epoch=epoch,
+                            step=step,
                             data_loader=validate_loader,
                             net=net,
                             feature_center=feature_center,
                             loss=loss,
                             save_dir=options.save_dir,
-                            verbose=options.verbose)
+                            verbose=options.verbose,
+                            tbx=tbx)
         scheduler.step()
 
 
 def train(**kwargs):
     # Retrieve training configuration
     data_loader = kwargs['data_loader']
+    batch_size = kwargs['batch_size']
     net = kwargs['net']
     loss = kwargs['loss']
     optimizer = kwargs['optimizer']
     feature_center = kwargs['feature_center']
     epoch = kwargs['epoch']
+    step = kwargs['step']
     save_freq = kwargs['save_freq']
     save_dir = kwargs['save_dir']
     verbose = kwargs['verbose']
+    tbx = kwargs['tbx']
 
     # Attention Regularization: LA Loss
     l2_loss = nn.MSELoss()
@@ -280,7 +292,22 @@ def train(**kwargs):
 
         # end of this batch
         batches += 1
+        step += batch_size
         batch_end = time.time()
+
+        tbx.add_scalar('train/raw_loss', epoch_loss[0] / batches, step)
+        tbx.add_scalar('train/crop_loss',epoch_loss[1] / batches, step)
+        tbx.add_scalar('train/drop_loss',epoch_loss[2] / batches, step)
+        tbx.add_scalar('train/raw_top1_acc', epoch_acc[0, 0] / batches, step)
+        tbx.add_scalar('train/raw_top2_acc', epoch_acc[0, 1] / batches, step)
+        tbx.add_scalar('train/raw_top3_acc', epoch_acc[0, 2] / batches, step)
+        tbx.add_scalar('train/crop_top1_acc', epoch_acc[1, 0] / batches, step)
+        tbx.add_scalar('train/crop_top2_acc', epoch_acc[1, 1] / batches, step)
+        tbx.add_scalar('train/crop_top3_acc', epoch_acc[1, 2] / batches, step)
+        tbx.add_scalar('train/drop_top1_acc', epoch_acc[2, 0] / batches, step)
+        tbx.add_scalar('train/drop_top2_acc', epoch_acc[2, 1] / batches, step)
+        tbx.add_scalar('train/crop_top3_acc', epoch_acc[2, 2] / batches, step)
+
         if (i + 1) % verbose == 0:
             logging.info('\n\tBatch %d: (Raw) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Crop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Drop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), Time %3.2f' %
                          (i + 1,
@@ -301,7 +328,8 @@ def train(**kwargs):
             'save_dir': save_dir,
             'state_dict': state_dict,
             'feature_center': feature_center.cpu(),
-            'best_top1_val_accuracy': best_top1_val_accuracy},
+            'best_top1_val_accuracy': best_top1_val_accuracy,
+            'step': step},
             os.path.join(save_dir, '%03d.ckpt' % (epoch + 1)))
 
     # end of this epoch
@@ -328,6 +356,7 @@ def validate(**kwargs):
     verbose = kwargs['verbose']
     save_dir = kwargs['save_dir']
     feature_center = kwargs['feature_center']
+    tbx = kwargs['tbx']
 
     # Default Parameters
     theta_c = 0.5
@@ -383,6 +412,7 @@ def validate(**kwargs):
             # end of this batch
             batches += 1
             batch_end = time.time()
+
             if (i + 1) % verbose == 0:
                 logging.info('\n\tBatch %d: Loss %.5f, Accuracy: Top-1 %.2f, Top-3 %.2f, Top-5 %.2f, Time %3.2f' %
                          (i + 1, epoch_loss / batches, epoch_acc[0] / batches, epoch_acc[1] / batches, epoch_acc[2] / batches, batch_end - batch_start))
@@ -394,6 +424,11 @@ def validate(**kwargs):
     # metrics for average
     epoch_loss /= batches
     epoch_acc /= batches
+
+    tbx.add_scalar('val/loss', epoch_loss[0], epoch)
+    tbx.add_scalar('val/top1_acc', epoch_acc[0], epoch)
+    tbx.add_scalar('val/top2_acc', epoch_acc[1], epoch)
+    tbx.add_scalar('val/top3_acc', epoch_acc[2], epoch)
 
     # save best model
     global best_top1_val_accuracy
