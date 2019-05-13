@@ -1,3 +1,5 @@
 *.tar
 *.pyc
 __pychache__/
+saved_models/
+output/

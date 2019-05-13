@@ -21,15 +21,21 @@ from dataset import *
 
 USE_GPU = True
 device = None
-data_root_train = os.path.join('..', '..', 'dataset')  # path to train images
-data_root_test = os.path.join('..', '..', 'dataset')  # path to test images
+best_top1_val_accuracy = 0
+data_root = os.path.join('..', '..', 'dataset')  # path to images
 train_file = os.path.join('..', '..', 'dataset', 'train2019.json')
 val_file = os.path.join('..', '..', 'dataset', 'val2019.json')
 test_file = os.path.join('..', '..', 'dataset', 'test2019.json')
 
+# set isTest to True to run the test set (not implemented yet)
+isTest = False
+test_output_file_name = 'submission.csv' # submission file
+if isTest:
+    val_file = os.path.join('..', '..', 'dataset', 'test2018.json')
+
 
 def main():
-    global device
+    global device, best_top1_val_accuracy
     if USE_GPU and torch.cuda.is_available():
         device = torch.device('cuda')
     else:
@@ -51,14 +57,15 @@ def main():
                       help='learning rate (default: 1e-3)')
     parser.add_option('--sf', '--save-freq', dest='save_freq', default=1, type='int',
                       help='saving frequency of .ckpt models (default: 1)')
-    parser.add_option('--sd', '--save-dir', dest='save_dir', default='./models',
-                      help='saving directory of .ckpt models (default: ./models)')
-    parser.add_option('--init', '--initial-training', dest='initial_training', default=1, type='int',
-                      help='train from 1-beginning or 0-resume training (default: 1)')
+    parser.add_option('--sd', '--save-dir', dest='save_dir', default='./saved_models',
+                      help='saving directory of .ckpt models (default: ./saved_models)')
+    parser.add_option('--init', '--initial-training', dest='initial_training', default=False,
+                      help='train from True-beginning or False-resume training (default: False)')
 
     (options, args) = parser.parse_args()
 
-    logging.basicConfig(format='%(asctime)s: %(levelname)s: [%(filename)s:%(lineno)d]: %(message)s', level=logging.INFO)
+    logging.basicConfig(filename='./output/training.log', filemode='a',
+                        format='%(asctime)s: %(levelname)s: [%(filename)s:%(lineno)d]: %(message)s', level=logging.INFO)
     warnings.filterwarnings("ignore")
 
     ##################################
@@ -78,14 +85,13 @@ def main():
     if options.ckpt:
         ckpt = options.ckpt
 
-        if options.initial_training == 0:
-            # Get Name (epoch)
-            epoch_name = (ckpt.split('/')[-1]).split('.')[0]
-            start_epoch = int(epoch_name)
-
         # Load ckpt and get state_dict
         checkpoint = torch.load(ckpt)
         state_dict = checkpoint['state_dict']
+
+        if not options.initial_training:
+            start_epoch = checkpoint['epoch']
+        best_top1_val_accuracy = checkpoint['best_top1_val_accuracy']
 
         # Load weights
         net.load_state_dict(state_dict)
@@ -115,8 +121,8 @@ def main():
     ##################################
 
 
-    train_dataset, validate_dataset = INAT(data_root_train, train_file, image_size, is_train=True), \
-                                      INAT(data_root_train, val_file, image_size, is_train=False)
+    train_dataset, validate_dataset = INAT(data_root, train_file, image_size, is_train=True), \
+                                      INAT(data_root, val_file, image_size, is_train=False)
 
     train_loader, validate_loader = DataLoader(train_dataset, batch_size=options.batch_size, shuffle=True,
                                                num_workers=options.workers, pin_memory=True), \
@@ -148,9 +154,12 @@ def main():
               save_freq=options.save_freq,
               save_dir=options.save_dir,
               verbose=options.verbose)
-        val_loss = validate(data_loader=validate_loader,
+        val_loss = validate(epoch=epoch,
+                            data_loader=validate_loader,
                             net=net,
+                            feature_center=feature_center,
                             loss=loss,
+                            save_dir=options.save_dir,
                             verbose=options.verbose)
         scheduler.step()
 
@@ -281,6 +290,7 @@ def train(**kwargs):
                           batch_end - batch_start))
 
     # save checkpoint model
+    global best_top1_val_accuracy
     if epoch % save_freq == 0:
         state_dict = net.module.state_dict()
         for key in state_dict.keys():
@@ -290,7 +300,8 @@ def train(**kwargs):
             'epoch': epoch,
             'save_dir': save_dir,
             'state_dict': state_dict,
-            'feature_center': feature_center.cpu()},
+            'feature_center': feature_center.cpu(),
+            'best_top1_val_accuracy': best_top1_val_accuracy},
             os.path.join(save_dir, '%03d.ckpt' % (epoch + 1)))
 
     # end of this epoch
@@ -310,10 +321,13 @@ def train(**kwargs):
 
 def validate(**kwargs):
     # Retrieve training configuration
+    epoch = kwargs['epoch']
     data_loader = kwargs['data_loader']
     net = kwargs['net']
     loss = kwargs['loss']
     verbose = kwargs['verbose']
+    save_dir = kwargs['save_dir']
+    feature_center = kwargs['feature_center']
 
     # Default Parameters
     theta_c = 0.5
@@ -328,7 +342,7 @@ def validate(**kwargs):
     start_time = time.time()
     net.eval()
     with torch.no_grad():
-        for i, (X, y) in enumerate(data_loader):
+        for i, (X, _, y, _) in enumerate(data_loader):
             batch_start = time.time()
 
             # obtain data
@@ -381,10 +395,24 @@ def validate(**kwargs):
     epoch_loss /= batches
     epoch_acc /= batches
 
+    # save best model
+    global best_top1_val_accuracy
+    if epoch_acc[0] > best_top1_val_accuracy:
+        state_dict = net.module.state_dict()
+        for key in state_dict.keys():
+            state_dict[key] = state_dict[key].cpu()
+        torch.save({
+            'epoch': epoch,
+            'save_dir': save_dir,
+            'state_dict': state_dict,
+            'feature_center': feature_center.cpu(),
+            'best_top1_val_accuracy': best_top1_val_accuracy},
+            os.path.join(save_dir, 'best_top1_val_acc_%03d.ckpt' % (epoch + 1)))
+
     # show information for this epoch
     logging.info('Valid: Loss %.5f,  Accuracy: Top-1 %.2f, Top-3 %.2f, Top-5 %.2f, Time %3.2f'%
                  (epoch_loss, epoch_acc[0], epoch_acc[1], epoch_acc[2], end_time - start_time))
-    logging.info('')
+
 
     return epoch_loss
 
