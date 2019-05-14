@@ -127,15 +127,15 @@ def main():
                                     DataLoader(validate_dataset, batch_size=options.batch_size, shuffle=False,
                                                num_workers=options.workers, pin_memory=True)
 
-    # optimizer = torch.optim.Adam(net.parameters())
-    optimizer = torch.optim.SGD(net.parameters(), lr=options.lr, momentum=0.9, weight_decay=0.00001)
+    optimizer = torch.optim.Adam(net.parameters())
+    # optimizer = torch.optim.SGD(net.parameters(), lr=options.lr, momentum=0.9, weight_decay=0.00001)
     loss = nn.CrossEntropyLoss()
 
     ##################################
     # Learning rate scheduling
     ##################################
     # scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, patience=2)
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=2, gamma=0.9)
+    # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=2, gamma=0.9)
 
     ##################################
     # TRAINING
@@ -165,7 +165,7 @@ def main():
                 save_dir=options.save_dir,
                 verbose=options.verbose,
                 tbx=tbx)'''
-        scheduler.step()
+        # scheduler.step()
 
 
 def train(**kwargs):
