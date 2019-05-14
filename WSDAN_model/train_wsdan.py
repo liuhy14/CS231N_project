@@ -41,6 +41,7 @@ def main():
         device = torch.device('cuda')
     else:
         device = torch.device('cpu')
+    logging.info("using device {}".format(device))
 
     parser = OptionParser()
     parser.add_option('-j', '--workers', dest='workers', default=16, type='int',
