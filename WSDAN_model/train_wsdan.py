@@ -243,7 +243,7 @@ def train(**kwargs):
                 width_min = nonzero_indices[:, 1].min()
                 width_max = nonzero_indices[:, 1].max()
                 crop_images.append(F.upsample_bilinear(X[batch_index:batch_index + 1, :, height_min:height_max, width_min:width_max], size=crop_size))
-            crop_images = torch.cat(crop_images, dim=0)
+            crop_images = torch.cat(crop_images, dim=0).to('cuda')
 
         # crop images forward
         y_pred, _, _ = net(crop_images)
@@ -392,7 +392,7 @@ def validate(**kwargs):
                 width_min = nonzero_indices[:, 1].min()
                 width_max = nonzero_indices[:, 1].max()
                 crop_images.append(F.upsample_bilinear(X[batch_index:batch_index + 1, :, height_min:height_max, width_min:width_max], size=crop_size))
-            crop_images = torch.cat(crop_images, dim=0)
+            crop_images = torch.cat(crop_images, dim=0).to('cuda')
 
             y_pred_crop, _, _ = net(crop_images)
 
