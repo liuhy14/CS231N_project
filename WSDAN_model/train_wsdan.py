@@ -317,7 +317,7 @@ def train(**kwargs):
 
         # save checkpoint model and validate
         if (i + 1) % save_freq == 0:
-            logging.info('saving the latest model from epoch {}'.format(epoch))
+            logging.info('saving the latest model from epoch {}'.format(epoch + 1))
             state_dict = net.module.state_dict()
             for key in state_dict.keys():
                 state_dict[key] = state_dict[key].cpu()
