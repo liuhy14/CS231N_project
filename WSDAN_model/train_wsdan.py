@@ -41,8 +41,8 @@ def main():
                       help='number of data loading workers (default: 16)')
     parser.add_option('-e', '--epochs', dest='epochs', default=20, type='int',
                       help='number of epochs (default: 20)')
-    parser.add_option('-b', '--batch-size', dest='batch_size', default=64, type='int',
-                      help='batch size (default: 64)')
+    parser.add_option('-b', '--batch-size', dest='batch_size', default=32, type='int',
+                      help='batch size (default: 32)')
     parser.add_option('-c', '--ckpt', dest='ckpt', default=False,
                       help='load checkpoint model (default: False)')
     parser.add_option('-v', '--verbose', dest='verbose', default=100, type='int',
@@ -295,14 +295,14 @@ def train(**kwargs):
         tbx.add_scalar('train/crop_loss',epoch_loss[1] / batches, step)
         tbx.add_scalar('train/drop_loss',epoch_loss[2] / batches, step)
         tbx.add_scalar('train/raw_top1_acc', epoch_acc[0, 0] / batches, step)
-        tbx.add_scalar('train/raw_top2_acc', epoch_acc[0, 1] / batches, step)
-        tbx.add_scalar('train/raw_top3_acc', epoch_acc[0, 2] / batches, step)
+        tbx.add_scalar('train/raw_top3_acc', epoch_acc[0, 1] / batches, step)
+        tbx.add_scalar('train/raw_top5_acc', epoch_acc[0, 2] / batches, step)
         tbx.add_scalar('train/crop_top1_acc', epoch_acc[1, 0] / batches, step)
-        tbx.add_scalar('train/crop_top2_acc', epoch_acc[1, 1] / batches, step)
-        tbx.add_scalar('train/crop_top3_acc', epoch_acc[1, 2] / batches, step)
+        tbx.add_scalar('train/crop_top3_acc', epoch_acc[1, 1] / batches, step)
+        tbx.add_scalar('train/crop_top5_acc', epoch_acc[1, 2] / batches, step)
         tbx.add_scalar('train/drop_top1_acc', epoch_acc[2, 0] / batches, step)
-        tbx.add_scalar('train/drop_top2_acc', epoch_acc[2, 1] / batches, step)
-        tbx.add_scalar('train/drop_top3_acc', epoch_acc[2, 2] / batches, step)
+        tbx.add_scalar('train/drop_top3_acc', epoch_acc[2, 1] / batches, step)
+        tbx.add_scalar('train/drop_top5_acc', epoch_acc[2, 2] / batches, step)
 
         if (i + 1) % verbose == 0:
             logging.info('\n\tBatch %d: (Raw) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Crop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Drop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), Time %3.2f' %
@@ -424,8 +424,8 @@ def validate(**kwargs):
 
     tbx.add_scalar('val/loss', epoch_loss, epoch)
     tbx.add_scalar('val/top1_acc', epoch_acc[0], epoch)
-    tbx.add_scalar('val/top2_acc', epoch_acc[1], epoch)
-    tbx.add_scalar('val/top3_acc', epoch_acc[2], epoch)
+    tbx.add_scalar('val/top3_acc', epoch_acc[1], epoch)
+    tbx.add_scalar('val/top5_acc', epoch_acc[2], epoch)
 
     # save best model
     global best_top1_val_accuracy
