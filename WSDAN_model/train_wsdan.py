@@ -43,8 +43,8 @@ def main():
                       help='number of epochs (default: 20)')
     parser.add_option('-b', '--batch-size', dest='batch_size', default=32, type='int',
                       help='batch size (default: 32)')
-    parser.add_option('-c', '--ckpt', dest='ckpt', default=False,
-                      help='load checkpoint model (default: False)')
+    parser.add_option('-c', '--ckpt', dest='ckpt', default= './saved_models/latest.ckpt',
+                      help='load checkpoint model (default: ./saved_models/latest.ckpt)')
     parser.add_option('-v', '--verbose', dest='verbose', default=100, type='int',
                       help='show information for each <verbose> iterations (default: 100)')
 
@@ -127,6 +127,7 @@ def main():
                                     DataLoader(validate_dataset, batch_size=options.batch_size, shuffle=False,
                                                num_workers=options.workers, pin_memory=True)
 
+    # optimizer = torch.optim.Adam(net.parameters())
     optimizer = torch.optim.SGD(net.parameters(), lr=options.lr, momentum=0.9, weight_decay=0.00001)
     loss = nn.CrossEntropyLoss()
 
@@ -154,15 +155,16 @@ def main():
               save_freq=options.save_freq,
               save_dir=options.save_dir,
               verbose=options.verbose,
-              tbx=tbx)
-        val_loss = validate(epoch=epoch,
-                            data_loader=validate_loader,
-                            net=net,
-                            feature_center=feature_center,
-                            loss=loss,
-                            save_dir=options.save_dir,
-                            verbose=options.verbose,
-                            tbx=tbx)
+              tbx=tbx,
+              val_data_loader=validate_loader)
+        '''validate(epoch=epoch,
+                data_loader=validate_loader,
+                net=net,
+                feature_center=feature_center,
+                loss=loss,
+                save_dir=options.save_dir,
+                verbose=options.verbose,
+                tbx=tbx)'''
         scheduler.step()
 
 
@@ -180,6 +182,7 @@ def train(**kwargs):
     save_dir = kwargs['save_dir']
     verbose = kwargs['verbose']
     tbx = kwargs['tbx']
+    val_data_loader = kwargs['val_data_loader']
     global best_top1_val_accuracy
 
     # Attention Regularization: LA Loss
@@ -312,7 +315,7 @@ def train(**kwargs):
                           epoch_loss[2] / batches, epoch_acc[2, 0] / batches, epoch_acc[2, 1] / batches, epoch_acc[2, 2] / batches,
                           batch_end - batch_start))
 
-        # save checkpoint model
+        # save checkpoint model and validate
         if (i + 1) % save_freq == 0:
             logging.info('saving the latest model from epoch {}'.format(epoch))
             state_dict = net.module.state_dict()
@@ -327,6 +330,16 @@ def train(**kwargs):
                 'best_top1_val_accuracy': best_top1_val_accuracy,
                 'step': step},
                 os.path.join(save_dir, 'latest.ckpt'))
+
+            validate(epoch=epoch,
+                     step=step,
+                     data_loader=val_data_loader,
+                     net=net,
+                     feature_center=feature_center,
+                     loss=loss,
+                     save_dir=save_dir,
+                     verbose=verbose,
+                     tbx=tbx)
 
     # end of this epoch
     end_time = time.time()
@@ -349,6 +362,7 @@ def train(**kwargs):
 def validate(**kwargs):
     # Retrieve training configuration
     epoch = kwargs['epoch']
+    step = kwargs['step']
     data_loader = kwargs['data_loader']
     net = kwargs['net']
     loss = kwargs['loss']
@@ -424,10 +438,10 @@ def validate(**kwargs):
     epoch_loss /= batches
     epoch_acc /= batches
 
-    tbx.add_scalar('val/loss', epoch_loss, epoch)
-    tbx.add_scalar('val/top1_acc', epoch_acc[0], epoch)
-    tbx.add_scalar('val/top3_acc', epoch_acc[1], epoch)
-    tbx.add_scalar('val/top5_acc', epoch_acc[2], epoch)
+    tbx.add_scalar('val/loss_new', epoch_loss, step)
+    tbx.add_scalar('val/top1_acc_new', epoch_acc[0], step)
+    tbx.add_scalar('val/top3_acc_new', epoch_acc[1], step)
+    tbx.add_scalar('val/top5_acc_new', epoch_acc[2], step)
 
     # save best model
     global best_top1_val_accuracy
