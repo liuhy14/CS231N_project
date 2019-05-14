@@ -220,6 +220,7 @@ def train(**kwargs):
         # loss
         batch_loss = loss(y_pred, y) + l2_loss(feature_matrix, feature_center[y])
         epoch_loss[0] += batch_loss.item()
+        tbx.add_scalar('train/raw_loss', batch_loss.item(), step)
 
         # backward
         optimizer.zero_grad()
@@ -231,7 +232,11 @@ def train(**kwargs):
 
         # metrics: top-1, top-3, top-5 error
         with torch.no_grad():
-            epoch_acc[0] = epoch_acc[0] + accuracy(y_pred, y, topk=(1, 3, 5))
+            acc = accuracy(y_pred, y, topk=(1, 3, 5))
+            epoch_acc[0] = epoch_acc[0] + acc
+            tbx.add_scalar('train/raw_top1_acc', acc[0], step)
+            tbx.add_scalar('train/raw_top3_acc', acc[1], step)
+            tbx.add_scalar('train/raw_top5_acc', acc[2], step)
 
         ##################################
         # Attention Cropping
@@ -254,7 +259,7 @@ def train(**kwargs):
         # loss
         batch_loss = loss(y_pred, y)
         epoch_loss[1] += batch_loss.item()
-
+        tbx.add_scalar('train/crop_loss', batch_loss.item(), step)
         # backward
         optimizer.zero_grad()
         batch_loss.backward()
@@ -262,7 +267,11 @@ def train(**kwargs):
 
         # metrics: top-1, top-3, top-5 error
         with torch.no_grad():
-            epoch_acc[1] = epoch_acc[1] + accuracy(y_pred, y, topk=(1, 3, 5))
+            acc =accuracy(y_pred, y, topk=(1, 3, 5))
+            epoch_acc[1] = epoch_acc[1] + acc
+            tbx.add_scalar('train/crop_top1_acc', acc[0], step)
+            tbx.add_scalar('train/crop_top3_acc', acc[1], step)
+            tbx.add_scalar('train/crop_top5_acc', acc[2], step)
 
         ##################################
         # Attention Dropping
@@ -277,6 +286,7 @@ def train(**kwargs):
         # loss
         batch_loss = loss(y_pred, y)
         epoch_loss[2] += batch_loss.item()
+        tbx.add_scalar('train/drop_loss', batch_loss.item(), step)
 
         # backward
         optimizer.zero_grad()
@@ -285,27 +295,17 @@ def train(**kwargs):
 
         # metrics: top-1, top-3, top-5 error
         with torch.no_grad():
-            epoch_acc[2] = epoch_acc[2] + accuracy(y_pred, y, topk=(1, 3, 5))
+            acc = accuracy(y_pred, y, topk=(1, 3, 5))
+            epoch_acc[2] = epoch_acc[2] + acc
+            tbx.add_scalar('train/drop_top1_acc', acc[0], step)
+            tbx.add_scalar('train/drop_top3_acc', acc[1], step)
+            tbx.add_scalar('train/drop_top5_acc', acc[2], step)
 
         # end of this batch
         batches += 1
         step += batch_size
         batch_end = time.time()
 
-
-
-        tbx.add_scalar('train/raw_loss', epoch_loss[0] / batches, step)
-        tbx.add_scalar('train/crop_loss',epoch_loss[1] / batches, step)
-        tbx.add_scalar('train/drop_loss',epoch_loss[2] / batches, step)
-        tbx.add_scalar('train/raw_top1_acc', epoch_acc[0, 0] / batches, step)
-        tbx.add_scalar('train/raw_top3_acc', epoch_acc[0, 1] / batches, step)
-        tbx.add_scalar('train/raw_top5_acc', epoch_acc[0, 2] / batches, step)
-        tbx.add_scalar('train/crop_top1_acc', epoch_acc[1, 0] / batches, step)
-        tbx.add_scalar('train/crop_top3_acc', epoch_acc[1, 1] / batches, step)
-        tbx.add_scalar('train/crop_top5_acc', epoch_acc[1, 2] / batches, step)
-        tbx.add_scalar('train/drop_top1_acc', epoch_acc[2, 0] / batches, step)
-        tbx.add_scalar('train/drop_top3_acc', epoch_acc[2, 1] / batches, step)
-        tbx.add_scalar('train/drop_top5_acc', epoch_acc[2, 2] / batches, step)
 
         if (i + 1) % verbose == 0:
             logging.info('\n\tBatch %d: (Raw) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Crop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Drop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), Time %3.2f' %
