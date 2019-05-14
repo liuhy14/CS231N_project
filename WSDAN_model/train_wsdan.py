@@ -20,8 +20,6 @@ from utils import accuracy
 from models import *
 from dataset import *
 
-USE_GPU = True
-device = None
 best_top1_val_accuracy = 0
 data_root = os.path.join('..', '..', 'dataset')  # path to images
 train_file = os.path.join('..', '..', 'dataset', 'train2019.json')
@@ -36,12 +34,7 @@ if isTest:
 
 
 def main():
-    global device, best_top1_val_accuracy
-    if USE_GPU and torch.cuda.is_available():
-        device = torch.device('cuda')
-    else:
-        device = torch.device('cpu')
-    logging.info("using device {}".format(device))
+    global best_top1_val_accuracy
 
     parser = OptionParser()
     parser.add_option('-j', '--workers', dest='workers', default=16, type='int',
@@ -84,7 +77,7 @@ def main():
     net = WSDAN(num_classes=num_classes, M=num_attentions, net=feature_net)
 
     # feature_center: size of (#classes, #attention_maps, #channel_features)
-    feature_center = torch.zeros(num_classes, num_attentions, net.num_features * net.expansion).to(device)
+    feature_center = torch.zeros(num_classes, num_attentions, net.num_features * net.expansion).to('cuda')
 
     if options.ckpt:
         ckpt = options.ckpt
@@ -104,7 +97,7 @@ def main():
 
         # load feature center
         if 'feature_center' in checkpoint:
-            feature_center = checkpoint['feature_center'].to(device)
+            feature_center = checkpoint['feature_center'].to('cuda')
             logging.info('feature_center loaded from {}'.format(options.ckpt))
 
     ##################################
@@ -118,7 +111,7 @@ def main():
     # Use cuda
     ##################################
     cudnn.benchmark = True
-    net.to(device)
+    net.to('cuda')
     net = nn.DataParallel(net)
 
     ##################################
@@ -187,7 +180,7 @@ def train(**kwargs):
     save_dir = kwargs['save_dir']
     verbose = kwargs['verbose']
     tbx = kwargs['tbx']
-    global best_top1_val_accuracy, device
+    global best_top1_val_accuracy
 
     # Attention Regularization: LA Loss
     l2_loss = nn.MSELoss()
@@ -213,8 +206,8 @@ def train(**kwargs):
         batch_start = time.time()
 
         # obtain data for training
-        X = X.to(device)
-        y = y.to(device)
+        X = X.to('cuda')
+        y = y.to('cuda')
 
         ##################################
         # Raw Image
@@ -361,7 +354,6 @@ def validate(**kwargs):
     save_dir = kwargs['save_dir']
     feature_center = kwargs['feature_center']
     tbx = kwargs['tbx']
-    global device
 
     # Default Parameters
     theta_c = 0.5
@@ -380,8 +372,8 @@ def validate(**kwargs):
             batch_start = time.time()
 
             # obtain data
-            X = X.to(device)
-            y = y.to(device)
+            X = X.to('cuda')
+            y = y.to('cuda')
 
             ##################################
             # Raw Image
