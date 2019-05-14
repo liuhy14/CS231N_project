@@ -186,6 +186,7 @@ def train(**kwargs):
     save_dir = kwargs['save_dir']
     verbose = kwargs['verbose']
     tbx = kwargs['tbx']
+    global best_top1_val_accuracy, device
 
     # Attention Regularization: LA Loss
     l2_loss = nn.MSELoss()
@@ -294,6 +295,8 @@ def train(**kwargs):
         step += batch_size
         batch_end = time.time()
 
+
+
         tbx.add_scalar('train/raw_loss', epoch_loss[0] / batches, step)
         tbx.add_scalar('train/crop_loss',epoch_loss[1] / batches, step)
         tbx.add_scalar('train/drop_loss',epoch_loss[2] / batches, step)
@@ -315,9 +318,16 @@ def train(**kwargs):
                           epoch_loss[2] / batches, epoch_acc[2, 0] / batches, epoch_acc[2, 1] / batches, epoch_acc[2, 2] / batches,
                           batch_end - batch_start))
 
+    # end of this epoch
+    end_time = time.time()
+
+    # metrics for average
+    epoch_loss /= batches
+    epoch_acc /= batches
+
     # save checkpoint model
-    global best_top1_val_accuracy
-    if epoch % save_freq == 0:
+    if (epoch) % save_freq == 0:
+        logging.info('saving the latest model from epoch {}'.format(epoch))
         state_dict = net.module.state_dict()
         for key in state_dict.keys():
             state_dict[key] = state_dict[key].cpu()
@@ -329,14 +339,7 @@ def train(**kwargs):
             'feature_center': feature_center.cpu(),
             'best_top1_val_accuracy': best_top1_val_accuracy,
             'step': step},
-            os.path.join(save_dir, '%03d.ckpt' % (epoch + 1)))
-
-    # end of this epoch
-    end_time = time.time()
-
-    # metrics for average
-    epoch_loss /= batches
-    epoch_acc /= batches
+            os.path.join(save_dir, 'latest.ckpt'))
 
     # show information for this epoch
     logging.info('Train: (Raw) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Crop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Drop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), Time %3.2f'%
@@ -357,6 +360,7 @@ def validate(**kwargs):
     save_dir = kwargs['save_dir']
     feature_center = kwargs['feature_center']
     tbx = kwargs['tbx']
+    global device
 
     # Default Parameters
     theta_c = 0.5
@@ -436,13 +440,14 @@ def validate(**kwargs):
         state_dict = net.module.state_dict()
         for key in state_dict.keys():
             state_dict[key] = state_dict[key].cpu()
+        logging.info('saving the best model from epoch {}'.format(epoch + 1))
         torch.save({
             'epoch': epoch,
             'save_dir': save_dir,
             'state_dict': state_dict,
             'feature_center': feature_center.cpu(),
             'best_top1_val_accuracy': best_top1_val_accuracy},
-            os.path.join(save_dir, 'best_top1_val_acc_%03d.ckpt' % (epoch + 1)))
+            os.path.join(save_dir, 'best_top1_val_acc.ckpt'))
 
     # show information for this epoch
     logging.info('Valid: Loss %.5f,  Accuracy: Top-1 %.2f, Top-3 %.2f, Top-5 %.2f, Time %3.2f'%
