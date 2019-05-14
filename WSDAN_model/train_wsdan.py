@@ -44,11 +44,11 @@ def main():
 
     parser = OptionParser()
     parser.add_option('-j', '--workers', dest='workers', default=16, type='int',
-                      help='number of data loading workers (default: 8)')
-    parser.add_option('-e', '--epochs', dest='epochs', default=80, type='int',
-                      help='number of epochs (default: 80)')
-    parser.add_option('-b', '--batch-size', dest='batch_size', default=16, type='int',
-                      help='batch size (default: 16)')
+                      help='number of data loading workers (default: 16)')
+    parser.add_option('-e', '--epochs', dest='epochs', default=20, type='int',
+                      help='number of epochs (default: 20)')
+    parser.add_option('-b', '--batch-size', dest='batch_size', default=64, type='int',
+                      help='batch size (default: 64)')
     parser.add_option('-c', '--ckpt', dest='ckpt', default=False,
                       help='load checkpoint model (default: False)')
     parser.add_option('-v', '--verbose', dest='verbose', default=100, type='int',
