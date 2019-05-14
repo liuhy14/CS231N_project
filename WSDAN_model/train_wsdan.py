@@ -50,8 +50,8 @@ def main():
 
     parser.add_option('--lr', '--learning-rate', dest='lr', default=1e-3, type='float',
                       help='learning rate (default: 1e-3)')
-    parser.add_option('--sf', '--save-freq', dest='save_freq', default=1, type='int',
-                      help='saving frequency of .ckpt models (default: 1)')
+    parser.add_option('--sf', '--save-freq', dest='save_freq', default=1000, type='int',
+                      help='saving frequency of .ckpt models (default: 1000)')
     parser.add_option('--sd', '--save-dir', dest='save_dir', default='./saved_models',
                       help='saving directory of .ckpt models (default: ./saved_models)')
     parser.add_option('--init', '--initial-training', dest='initial_training', default=False,
@@ -312,6 +312,22 @@ def train(**kwargs):
                           epoch_loss[2] / batches, epoch_acc[2, 0] / batches, epoch_acc[2, 1] / batches, epoch_acc[2, 2] / batches,
                           batch_end - batch_start))
 
+        # save checkpoint model
+        if (i + 1) % save_freq == 0:
+            logging.info('saving the latest model from epoch {}'.format(epoch))
+            state_dict = net.module.state_dict()
+            for key in state_dict.keys():
+                state_dict[key] = state_dict[key].cpu()
+
+            torch.save({
+                'epoch': epoch,
+                'save_dir': save_dir,
+                'state_dict': state_dict,
+                'feature_center': feature_center.cpu(),
+                'best_top1_val_accuracy': best_top1_val_accuracy,
+                'step': step},
+                os.path.join(save_dir, 'latest.ckpt'))
+
     # end of this epoch
     end_time = time.time()
 
@@ -319,21 +335,7 @@ def train(**kwargs):
     epoch_loss /= batches
     epoch_acc /= batches
 
-    # save checkpoint model
-    if (epoch) % save_freq == 0:
-        logging.info('saving the latest model from epoch {}'.format(epoch))
-        state_dict = net.module.state_dict()
-        for key in state_dict.keys():
-            state_dict[key] = state_dict[key].cpu()
 
-        torch.save({
-            'epoch': epoch,
-            'save_dir': save_dir,
-            'state_dict': state_dict,
-            'feature_center': feature_center.cpu(),
-            'best_top1_val_accuracy': best_top1_val_accuracy,
-            'step': step},
-            os.path.join(save_dir, 'latest.ckpt'))
 
     # show information for this epoch
     logging.info('Train: (Raw) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Crop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), (Drop) Loss %.4f, Accuracy: (%.2f, %.2f, %.2f), Time %3.2f'%
