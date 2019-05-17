@@ -98,6 +98,7 @@ def main():
             print("=> no checkpoint found at '{}'".format(args.resume))
 
     cudnn.benchmark = True
+    model = nn.DataParallel(model)
 
     # data loading code
     train_dataset = inat2018_loader.INAT(args.data_root_train, args.train_file,
