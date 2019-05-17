@@ -3,7 +3,7 @@ Created: May 04,2019 - Yuchong Gu
 Revised: May 07,2019 - Yuchong Gu
 """
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
 import time
 import logging
 import warnings
@@ -37,7 +37,7 @@ def main():
     global best_top1_val_accuracy
 
     parser = OptionParser()
-    parser.add_option('-j', '--workers', dest='workers', default=16, type='int',
+    parser.add_option('-j', '--workers', dest='workers', default=8, type='int',
                       help='number of data loading workers (default: 16)')
     parser.add_option('-e', '--epochs', dest='epochs', default=20, type='int',
                       help='number of epochs (default: 20)')
@@ -101,9 +101,10 @@ def main():
         # Load weights
         net.load_state_dict(state_dict)
         logging.info('Network loaded from {}'.format(options.ckpt))
+        '''
         if 'optimizer' in checkpoint:
             optimizer.load_state_dict(checkpoint['optimizer'])
-
+        '''
         # load feature center
         if 'feature_center' in checkpoint:
             feature_center = checkpoint['feature_center'].to('cuda')
