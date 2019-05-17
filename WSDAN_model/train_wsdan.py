@@ -42,7 +42,7 @@ def main():
     parser.add_option('-e', '--epochs', dest='epochs', default=20, type='int',
                       help='number of epochs (default: 20)')
     parser.add_option('-b', '--batch-size', dest='batch_size', default=32, type='int',
-                      help='batch size (default: 32)')
+                      help='batch size (default: 64)')
     parser.add_option('-c', '--ckpt', dest='ckpt', default= './saved_models/latest.ckpt',
                       help='load checkpoint model (default: ./saved_models/latest.ckpt)')
     parser.add_option('-v', '--verbose', dest='verbose', default=100, type='int',
@@ -59,7 +59,7 @@ def main():
 
     (options, args) = parser.parse_args()
 
-    logging.basicConfig(filename='./output/training.log', filemode='a',
+    logging.basicConfig(filename='./training.log', filemode='a',
                         format='%(asctime)s: %(levelname)s: [%(filename)s:%(lineno)d]: %(message)s', level=logging.INFO)
     warnings.filterwarnings("ignore")
 
@@ -71,7 +71,11 @@ def main():
     num_attentions = 32
     start_epoch = 0
     step = 0
-    tbx = SummaryWriter('./output/tensorboard')
+    save_dir_tb = './tensorboard'
+    if not os.path.exists(save_dir_tb):
+        os.makedirs(save_dir_tb)
+    tbx = SummaryWriter(save_dir_tb)
+    validate_freq = 200
 
     feature_net = inception_v3(pretrained=True)
     net = WSDAN(num_classes=num_classes, M=num_attentions, net=feature_net)
@@ -97,8 +101,8 @@ def main():
         # Load weights
         net.load_state_dict(state_dict)
         logging.info('Network loaded from {}'.format(options.ckpt))
-
-        optimizer.load_state_dict(checkpoint['optimizer'])
+        if 'optimizer' in checkpoint:
+            optimizer.load_state_dict(checkpoint['optimizer'])
 
         # load feature center
         if 'feature_center' in checkpoint:
@@ -156,6 +160,7 @@ def main():
               loss=loss,
               optimizer=optimizer,
               save_freq=options.save_freq,
+              validate_freq=validate_freq,
               save_dir=options.save_dir,
               verbose=options.verbose,
               tbx=tbx,
@@ -186,6 +191,7 @@ def train(**kwargs):
     verbose = kwargs['verbose']
     tbx = kwargs['tbx']
     val_data_loader = kwargs['val_data_loader']
+    validate_freq = kwargs['validate_freq']
     global best_top1_val_accuracy
 
     # Attention Regularization: LA Loss
