@@ -22,7 +22,7 @@ class Params:
     workers = 6
     epochs = 10
     start_epoch = 0
-    batch_size = 32  # might want to make smaller
+    batch_size = 128  # might want to make smaller
     lr = 0.001
     # lr_decay = 0.94
     epoch_decay = 4
