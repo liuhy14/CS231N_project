@@ -75,6 +75,9 @@ def main():
 
     feature_net = inception_v3(pretrained=True)
     net = WSDAN(num_classes=num_classes, M=num_attentions, net=feature_net)
+    optimizer = torch.optim.Adam(net.parameters())
+    # optimizer = torch.optim.SGD(net.parameters(), lr=options.lr, momentum=0.9, weight_decay=0.00001)
+    loss = nn.CrossEntropyLoss()
 
     # feature_center: size of (#classes, #attention_maps, #channel_features)
     feature_center = torch.zeros(num_classes, num_attentions, net.num_features * net.expansion).to('cuda')
@@ -94,6 +97,8 @@ def main():
         # Load weights
         net.load_state_dict(state_dict)
         logging.info('Network loaded from {}'.format(options.ckpt))
+
+        optimizer.load_state_dict(checkpoint['optimizer'])
 
         # load feature center
         if 'feature_center' in checkpoint:
@@ -127,9 +132,7 @@ def main():
                                     DataLoader(validate_dataset, batch_size=options.batch_size, shuffle=False,
                                                num_workers=options.workers, pin_memory=True)
 
-    optimizer = torch.optim.Adam(net.parameters())
-    # optimizer = torch.optim.SGD(net.parameters(), lr=options.lr, momentum=0.9, weight_decay=0.00001)
-    loss = nn.CrossEntropyLoss()
+
 
     ##################################
     # Learning rate scheduling
@@ -328,7 +331,8 @@ def train(**kwargs):
                 'state_dict': state_dict,
                 'feature_center': feature_center.cpu(),
                 'best_top1_val_accuracy': best_top1_val_accuracy,
-                'step': step},
+                'step': step,
+                'optimizer' : optimizer.state_dict()},
                 os.path.join(save_dir, 'latest.ckpt'))
 
             validate(epoch=epoch,
@@ -339,7 +343,8 @@ def train(**kwargs):
                      loss=loss,
                      save_dir=save_dir,
                      verbose=verbose,
-                     tbx=tbx)
+                     tbx=tbx,
+                     optimizer=optimizer)
 
     # end of this epoch
     end_time = time.time()
@@ -370,6 +375,7 @@ def validate(**kwargs):
     save_dir = kwargs['save_dir']
     feature_center = kwargs['feature_center']
     tbx = kwargs['tbx']
+    optimizer = kwargs['optimizer']
 
     # Default Parameters
     theta_c = 0.5
@@ -455,7 +461,8 @@ def validate(**kwargs):
             'save_dir': save_dir,
             'state_dict': state_dict,
             'feature_center': feature_center.cpu(),
-            'best_top1_val_accuracy': best_top1_val_accuracy},
+            'best_top1_val_accuracy': best_top1_val_accuracy,
+            'optimizer': optimizer.state_dict(),},
             os.path.join(save_dir, 'best_top1_val_acc.ckpt'))
 
     # show information for this epoch

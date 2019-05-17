@@ -12,22 +12,24 @@ import torch.optim
 import torch.utils.data
 #import torchvision.models as models
 from inception import *
+from tensorboardX import SummaryWriter
 
 import inat2018_loader
 
 class Params:
     # arch = 'inception_v3'
-    num_classes = 8142
+    num_classes = 1010
     workers = 6
     epochs = 10
     start_epoch = 0
-    batch_size = 50  # might want to make smaller 
-    lr = 0.0045
-    lr_decay = 0.94
+    batch_size = 32  # might want to make smaller
+    lr = 0.001
+    # lr_decay = 0.94
     epoch_decay = 4
-    momentum = 0.9
+    # momentum = 0.9
     weight_decay = 1e-4
     print_freq = 100
+    validate_freq = 500
 
     resume = 'checkpoint.pth.tar'                    # set this to path of model to resume training
     train_file = '../../dataset/train2019.json'
@@ -37,17 +39,21 @@ class Params:
 
     # set evaluate to True to run the test set
     evaluate = False
-    save_preds = True
+    save_preds = False
     op_file_name = 'submission.csv' # submission file
     if evaluate:
         val_file = '../../dataset/test2019.json'
 
 best_prec3 = 0.0  # store current best top 3
 
-
 def main():
     global args, best_prec3
+    step = 0  # store current step
     args = Params()
+    save_dir_tb = './tensorboard'
+    if not os.path.exists(save_dir_tb):
+        os.makedirs(save_dir_tb)
+    tb = SummaryWriter(save_dir_tb)
 
 
     USE_GPU = True
@@ -71,9 +77,10 @@ def main():
     # define loss function (criterion) and optimizer
     criterion = nn.CrossEntropyLoss()
     criterion = criterion.to(device)
-    optimizer = torch.optim.SGD(model.parameters(), args.lr,
+    '''optimizer = torch.optim.SGD(model.parameters(), args.lr,
                                 momentum=args.momentum,
-                                weight_decay=args.weight_decay)
+                                weight_decay=args.weight_decay)'''
+    optimizer = torch.optim.adam(model.parameters(), lr = args.lr, weight_decay = args.weight_decay)
 
     # optionally resume from a checkpoint
     if args.resume:
@@ -84,6 +91,7 @@ def main():
             best_prec3 = checkpoint['best_prec3']
             model.load_state_dict(checkpoint['state_dict'])
             optimizer.load_state_dict(checkpoint['optimizer'])
+            step = checkpoint['step']
             print("=> loaded checkpoint '{}' (epoch {})"
                   .format(args.resume, checkpoint['epoch']))
         else:
@@ -117,10 +125,10 @@ def main():
         adjust_learning_rate(optimizer, epoch)
 
         # train for one epoch
-        train(train_loader, model, criterion, optimizer, epoch)
+        step = train(train_loader, val_loader, model, criterion, optimizer, epoch, step, args.batch_size, tb)
 
         # evaluate on validation set
-        prec3 = validate(val_loader, model, criterion, False)
+        prec3 = validate(val_loader, model, criterion, step, tb, False)
 
         # remember best prec@1 and save checkpoint
         is_best = prec3 > best_prec3
@@ -131,10 +139,11 @@ def main():
             'state_dict': model.state_dict(),
             'best_prec3': best_prec3,
             'optimizer' : optimizer.state_dict(),
+            'step': step
         }, is_best)
 
 
-def train(train_loader, model, criterion, optimizer, epoch):
+def train(train_loader, val_loader, model, criterion, optimizer, epoch, step, batch_size, tb):
     batch_time = AverageMeter()
     data_time = AverageMeter()
     losses = AverageMeter()
@@ -175,6 +184,11 @@ def train(train_loader, model, criterion, optimizer, epoch):
         # measure elapsed time
         batch_time.update(time.time() - end)
         end = time.time()
+        step += batch_size
+
+        tb.add_scalar('train/loss', losses.val, step)
+        tb.add_scalar('train/top1', top1.val, step)
+        tb.add_scalar('train/top3', top3.val, step)
 
         if i % args.print_freq == 0:
             print('[{0}/{1}]\t'
@@ -186,8 +200,12 @@ def train(train_loader, model, criterion, optimizer, epoch):
                 i, len(train_loader), batch_time=batch_time,
                 data_time=data_time, loss=losses, top1=top1, top3=top3))
 
+        if i % args.validate_freq == 0:
+            validate(val_loader, model, criterion, step, tb, save_preds=False)
+    return step
 
-def validate(val_loader, model, criterion, save_preds=False):
+
+def validate(val_loader, model, criterion, step, tb, save_preds=False):
     batch_time = AverageMeter()
     losses = AverageMeter()
     top1 = AverageMeter()
@@ -230,6 +248,7 @@ def validate(val_loader, model, criterion, save_preds=False):
         batch_time.update(time.time() - end)
         end = time.time()
 
+        # print out results
         if i % args.print_freq == 0:
             print('[{0}/{1}]\t'
                   '{batch_time.val:.2f} ({batch_time.avg:.2f})\t'
@@ -242,6 +261,9 @@ def validate(val_loader, model, criterion, save_preds=False):
     print(' * Prec@1 {top1.avg:.3f} Prec@3 {top3.avg:.3f}'
           .format(top1=top1, top3=top3))
 
+    tb.add_scalar('val/loss', losses.avg, step)
+    tb.add_scalar('val/top1', top1.avg, step)
+    tb.add_scalar('val/top3', top3.avg, step)
     if save_preds:
         return top3.avg, np.vstack(pred), np.hstack(im_ids)
     else:
