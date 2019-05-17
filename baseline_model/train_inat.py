@@ -29,7 +29,7 @@ class Params:
     # momentum = 0.9
     weight_decay = 1e-4
     print_freq = 100
-    validate_freq = 500
+    validate_freq = 50
 
     resume = 'checkpoint.pth.tar'                    # set this to path of model to resume training
     train_file = '../../dataset/train2019.json'
