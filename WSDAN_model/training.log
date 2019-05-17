@@ -1,0 +1,424 @@
+2019-05-14 03:11:42,236: INFO: [driver.py:123]: Generating grammar tables from /usr/lib/python2.7/lib2to3/Grammar.txt
+2019-05-14 03:11:42,258: INFO: [driver.py:123]: Generating grammar tables from /usr/lib/python2.7/lib2to3/PatternGrammar.txt
+2019-05-14 03:11:50,114: INFO: [wsdan.py:82]: WSDAN: using inception as feature extractor
+2019-05-14 03:11:55,906: INFO: [train_wsdan.py:143]: 
+Start training: Total epochs: 20, Batch size: 32, Training size: 265213, Validation size: 3030
+2019-05-14 03:11:55,906: INFO: [train_wsdan.py:203]: Epoch 001, Learning Rate 0.001
+2019-05-14 03:19:35,914: INFO: [train_wsdan.py:313]: 
+	Batch 100: (Raw) Loss 6.9147, Accuracy: (0.19, 0.81, 1.31), (Crop) Loss 6.9141, Accuracy: (0.22, 0.69, 1.16), (Drop) Loss 6.9144, Accuracy: (0.28, 0.81, 1.34), Time 4.32
+2019-05-14 03:26:39,389: INFO: [train_wsdan.py:313]: 
+	Batch 200: (Raw) Loss 6.9082, Accuracy: (0.28, 0.92, 1.31), (Crop) Loss 6.9071, Accuracy: (0.33, 0.86, 1.28), (Drop) Loss 6.9084, Accuracy: (0.30, 0.84, 1.34), Time 4.19
+2019-05-14 03:33:42,609: INFO: [train_wsdan.py:313]: 
+	Batch 300: (Raw) Loss 6.8868, Accuracy: (0.32, 0.96, 1.34), (Crop) Loss 6.8836, Accuracy: (0.39, 0.92, 1.31), (Drop) Loss 6.8903, Accuracy: (0.32, 0.85, 1.31), Time 4.16
+2019-05-14 03:40:45,895: INFO: [train_wsdan.py:313]: 
+	Batch 400: (Raw) Loss 6.8549, Accuracy: (0.30, 0.89, 1.35), (Crop) Loss 6.8485, Accuracy: (0.36, 0.88, 1.34), (Drop) Loss 6.8611, Accuracy: (0.30, 0.78, 1.27), Time 4.30
+2019-05-14 03:47:48,569: INFO: [train_wsdan.py:313]: 
+	Batch 500: (Raw) Loss 6.8196, Accuracy: (0.33, 0.91, 1.44), (Crop) Loss 6.8098, Accuracy: (0.38, 0.94, 1.45), (Drop) Loss 6.8280, Accuracy: (0.32, 0.82, 1.32), Time 4.24
+2019-05-14 03:54:52,694: INFO: [train_wsdan.py:313]: 
+	Batch 600: (Raw) Loss 6.7856, Accuracy: (0.38, 0.99, 1.56), (Crop) Loss 6.7726, Accuracy: (0.42, 1.06, 1.61), (Drop) Loss 6.7958, Accuracy: (0.35, 0.89, 1.46), Time 4.33
+2019-05-14 04:01:56,652: INFO: [train_wsdan.py:313]: 
+	Batch 700: (Raw) Loss 6.7544, Accuracy: (0.42, 1.11, 1.75), (Crop) Loss 6.7377, Accuracy: (0.47, 1.20, 1.82), (Drop) Loss 6.7665, Accuracy: (0.38, 0.98, 1.58), Time 4.15
+2019-05-14 04:09:01,253: INFO: [train_wsdan.py:313]: 
+	Batch 800: (Raw) Loss 6.7167, Accuracy: (0.45, 1.25, 1.97), (Crop) Loss 6.6971, Accuracy: (0.52, 1.34, 2.04), (Drop) Loss 6.7313, Accuracy: (0.44, 1.07, 1.78), Time 4.27
+2019-05-14 04:16:05,522: INFO: [train_wsdan.py:313]: 
+	Batch 900: (Raw) Loss 6.6733, Accuracy: (0.54, 1.52, 2.34), (Crop) Loss 6.6539, Accuracy: (0.62, 1.57, 2.36), (Drop) Loss 6.6904, Accuracy: (0.53, 1.28, 2.06), Time 4.32
+2019-05-14 04:23:09,382: INFO: [train_wsdan.py:313]: 
+	Batch 1000: (Raw) Loss 6.6175, Accuracy: (0.71, 1.83, 2.83), (Crop) Loss 6.5995, Accuracy: (0.76, 1.91, 2.90), (Drop) Loss 6.6396, Accuracy: (0.65, 1.61, 2.53), Time 4.25
+2019-05-14 04:23:09,382: INFO: [train_wsdan.py:317]: saving the latest model from epoch 0
+2019-05-14 04:30:12,995: INFO: [train_wsdan.py:313]: 
+	Batch 1100: (Raw) Loss 6.5500, Accuracy: (0.93, 2.34, 3.55), (Crop) Loss 6.5339, Accuracy: (0.98, 2.39, 3.59), (Drop) Loss 6.5774, Accuracy: (0.80, 2.07, 3.16), Time 4.16
+2019-05-14 04:37:15,836: INFO: [train_wsdan.py:313]: 
+	Batch 1200: (Raw) Loss 6.4742, Accuracy: (1.26, 3.04, 4.49), (Crop) Loss 6.4602, Accuracy: (1.32, 3.06, 4.52), (Drop) Loss 6.5103, Accuracy: (1.05, 2.64, 3.94), Time 4.20
+2019-05-14 04:44:19,308: INFO: [train_wsdan.py:313]: 
+	Batch 1300: (Raw) Loss 6.3939, Accuracy: (1.68, 3.88, 5.61), (Crop) Loss 6.3833, Accuracy: (1.70, 3.90, 5.59), (Drop) Loss 6.4381, Accuracy: (1.38, 3.29, 4.85), Time 4.24
+2019-05-14 04:51:22,449: INFO: [train_wsdan.py:313]: 
+	Batch 1400: (Raw) Loss 6.3090, Accuracy: (2.12, 4.75, 6.81), (Crop) Loss 6.3024, Accuracy: (2.06, 4.73, 6.69), (Drop) Loss 6.3645, Accuracy: (1.75, 3.98, 5.76), Time 4.29
+2019-05-14 04:58:26,138: INFO: [train_wsdan.py:313]: 
+	Batch 1500: (Raw) Loss 6.2259, Accuracy: (2.60, 5.77, 8.12), (Crop) Loss 6.2233, Accuracy: (2.51, 5.66, 7.93), (Drop) Loss 6.2927, Accuracy: (2.12, 4.73, 6.79), Time 4.24
+2019-05-14 05:05:30,359: INFO: [train_wsdan.py:313]: 
+	Batch 1600: (Raw) Loss 6.1420, Accuracy: (3.11, 6.75, 9.43), (Crop) Loss 6.1451, Accuracy: (2.95, 6.55, 9.16), (Drop) Loss 6.2208, Accuracy: (2.52, 5.49, 7.85), Time 4.35
+2019-05-14 05:12:34,677: INFO: [train_wsdan.py:313]: 
+	Batch 1700: (Raw) Loss 6.0563, Accuracy: (3.69, 7.92, 10.94), (Crop) Loss 6.0642, Accuracy: (3.44, 7.60, 10.49), (Drop) Loss 6.1442, Accuracy: (2.93, 6.40, 9.01), Time 4.23
+2019-05-14 05:19:38,576: INFO: [train_wsdan.py:313]: 
+	Batch 1800: (Raw) Loss 5.9666, Accuracy: (4.31, 9.09, 12.41), (Crop) Loss 5.9796, Accuracy: (3.97, 8.65, 11.84), (Drop) Loss 6.0661, Accuracy: (3.38, 7.32, 10.15), Time 4.17
+2019-05-14 05:26:43,245: INFO: [train_wsdan.py:313]: 
+	Batch 1900: (Raw) Loss 5.8774, Accuracy: (4.98, 10.28, 13.91), (Crop) Loss 5.8955, Accuracy: (4.56, 9.77, 13.18), (Drop) Loss 5.9875, Accuracy: (3.88, 8.26, 11.34), Time 4.25
+2019-05-14 05:33:47,735: INFO: [train_wsdan.py:313]: 
+	Batch 2000: (Raw) Loss 5.7875, Accuracy: (5.68, 11.52, 15.43), (Crop) Loss 5.8116, Accuracy: (5.17, 10.84, 14.54), (Drop) Loss 5.9074, Accuracy: (4.41, 9.27, 12.58), Time 4.20
+2019-05-14 05:33:47,735: INFO: [train_wsdan.py:317]: saving the latest model from epoch 0
+2019-05-14 05:40:52,106: INFO: [train_wsdan.py:313]: 
+	Batch 2100: (Raw) Loss 5.6986, Accuracy: (6.39, 12.77, 16.98), (Crop) Loss 5.7278, Accuracy: (5.80, 11.96, 15.92), (Drop) Loss 5.8298, Accuracy: (4.94, 10.23, 13.82), Time 4.28
+2019-05-14 05:47:55,565: INFO: [train_wsdan.py:313]: 
+	Batch 2200: (Raw) Loss 5.6137, Accuracy: (7.08, 13.97, 18.44), (Crop) Loss 5.6484, Accuracy: (6.37, 13.03, 17.18), (Drop) Loss 5.7574, Accuracy: (5.43, 11.12, 14.94), Time 4.35
+2019-05-14 05:54:58,644: INFO: [train_wsdan.py:313]: 
+	Batch 2300: (Raw) Loss 5.5292, Accuracy: (7.75, 15.16, 19.85), (Crop) Loss 5.5695, Accuracy: (7.00, 14.09, 18.44), (Drop) Loss 5.6843, Accuracy: (5.96, 12.07, 16.10), Time 4.27
+2019-05-14 06:02:02,713: INFO: [train_wsdan.py:313]: 
+	Batch 2400: (Raw) Loss 5.4483, Accuracy: (8.41, 16.31, 21.23), (Crop) Loss 5.4937, Accuracy: (7.59, 15.14, 19.67), (Drop) Loss 5.6165, Accuracy: (6.43, 12.93, 17.16), Time 4.16
+2019-05-14 06:09:06,753: INFO: [train_wsdan.py:313]: 
+	Batch 2500: (Raw) Loss 5.3695, Accuracy: (9.09, 17.42, 22.52), (Crop) Loss 5.4206, Accuracy: (8.18, 16.11, 20.84), (Drop) Loss 5.5505, Accuracy: (6.91, 13.72, 18.18), Time 4.22
+2019-05-14 06:16:10,465: INFO: [train_wsdan.py:313]: 
+	Batch 2600: (Raw) Loss 5.2920, Accuracy: (9.77, 18.55, 23.86), (Crop) Loss 5.3483, Accuracy: (8.81, 17.08, 22.02), (Drop) Loss 5.4835, Accuracy: (7.46, 14.65, 19.26), Time 4.28
+2019-05-14 06:23:13,883: INFO: [train_wsdan.py:313]: 
+	Batch 2700: (Raw) Loss 5.2173, Accuracy: (10.46, 19.65, 25.12), (Crop) Loss 5.2800, Accuracy: (9.39, 18.03, 23.17), (Drop) Loss 5.4206, Accuracy: (7.99, 15.48, 20.25), Time 4.18
+2019-05-14 06:30:16,320: INFO: [train_wsdan.py:313]: 
+	Batch 2800: (Raw) Loss 5.1451, Accuracy: (11.14, 20.73, 26.35), (Crop) Loss 5.2141, Accuracy: (9.96, 19.00, 24.27), (Drop) Loss 5.3590, Accuracy: (8.50, 16.32, 21.24), Time 4.22
+2019-05-14 06:37:19,190: INFO: [train_wsdan.py:313]: 
+	Batch 2900: (Raw) Loss 5.0756, Accuracy: (11.79, 21.79, 27.58), (Crop) Loss 5.1502, Accuracy: (10.55, 19.91, 25.31), (Drop) Loss 5.2995, Accuracy: (8.99, 17.15, 22.21), Time 4.27
+2019-05-14 06:44:22,394: INFO: [train_wsdan.py:313]: 
+	Batch 3000: (Raw) Loss 5.0107, Accuracy: (12.45, 22.77, 28.70), (Crop) Loss 5.0900, Accuracy: (11.11, 20.75, 26.30), (Drop) Loss 5.2447, Accuracy: (9.46, 17.92, 23.11), Time 4.27
+2019-05-14 06:44:22,394: INFO: [train_wsdan.py:317]: saving the latest model from epoch 0
+2019-05-14 06:51:28,266: INFO: [train_wsdan.py:313]: 
+	Batch 3100: (Raw) Loss 4.9457, Accuracy: (13.07, 23.77, 29.82), (Crop) Loss 5.0304, Accuracy: (11.66, 21.60, 27.29), (Drop) Loss 5.1905, Accuracy: (9.89, 18.68, 24.01), Time 4.22
+2019-05-14 06:58:33,809: INFO: [train_wsdan.py:313]: 
+	Batch 3200: (Raw) Loss 4.8844, Accuracy: (13.71, 24.72, 30.89), (Crop) Loss 4.9739, Accuracy: (12.20, 22.43, 28.27), (Drop) Loss 5.1391, Accuracy: (10.35, 19.44, 24.90), Time 4.28
+2019-05-14 07:05:38,669: INFO: [train_wsdan.py:313]: 
+	Batch 3300: (Raw) Loss 4.8253, Accuracy: (14.33, 25.62, 31.89), (Crop) Loss 4.9191, Accuracy: (12.75, 23.26, 29.19), (Drop) Loss 5.0895, Accuracy: (10.79, 20.15, 25.72), Time 4.27
+2019-05-14 07:12:43,890: INFO: [train_wsdan.py:313]: 
+	Batch 3400: (Raw) Loss 4.7658, Accuracy: (14.98, 26.54, 32.92), (Crop) Loss 4.8635, Accuracy: (13.33, 24.08, 30.10), (Drop) Loss 5.0396, Accuracy: (11.26, 20.88, 26.54), Time 4.34
+2019-05-14 07:19:47,903: INFO: [train_wsdan.py:313]: 
+	Batch 3500: (Raw) Loss 4.7118, Accuracy: (15.55, 27.40, 33.87), (Crop) Loss 4.8144, Accuracy: (13.82, 24.83, 30.95), (Drop) Loss 4.9950, Accuracy: (11.67, 21.52, 27.28), Time 4.16
+2019-05-14 07:26:51,305: INFO: [train_wsdan.py:313]: 
+	Batch 3600: (Raw) Loss 4.6581, Accuracy: (16.14, 28.25, 34.82), (Crop) Loss 4.7656, Accuracy: (14.33, 25.57, 31.78), (Drop) Loss 4.9507, Accuracy: (12.10, 22.18, 28.03), Time 4.24
+2019-05-14 07:33:55,981: INFO: [train_wsdan.py:313]: 
+	Batch 3700: (Raw) Loss 4.6070, Accuracy: (16.69, 29.04, 35.70), (Crop) Loss 4.7184, Accuracy: (14.75, 26.24, 32.54), (Drop) Loss 4.9087, Accuracy: (12.48, 22.76, 28.72), Time 4.24
+2019-05-14 07:41:00,580: INFO: [train_wsdan.py:313]: 
+	Batch 3800: (Raw) Loss 4.5569, Accuracy: (17.28, 29.85, 36.57), (Crop) Loss 4.6713, Accuracy: (15.24, 26.94, 33.33), (Drop) Loss 4.8675, Accuracy: (12.86, 23.34, 29.40), Time 4.22
+2019-05-14 07:48:05,538: INFO: [train_wsdan.py:313]: 
+	Batch 3900: (Raw) Loss 4.5083, Accuracy: (17.83, 30.63, 37.43), (Crop) Loss 4.6266, Accuracy: (15.69, 27.63, 34.12), (Drop) Loss 4.8266, Accuracy: (13.25, 23.95, 30.10), Time 4.29
+2019-05-14 07:55:10,806: INFO: [train_wsdan.py:313]: 
+	Batch 4000: (Raw) Loss 4.4616, Accuracy: (18.36, 31.39, 38.25), (Crop) Loss 4.5838, Accuracy: (16.15, 28.30, 34.84), (Drop) Loss 4.7881, Accuracy: (13.63, 24.50, 30.74), Time 4.29
+2019-05-14 07:55:10,807: INFO: [train_wsdan.py:317]: saving the latest model from epoch 0
+2019-05-14 08:02:15,633: INFO: [train_wsdan.py:313]: 
+	Batch 4100: (Raw) Loss 4.4160, Accuracy: (18.91, 32.12, 39.02), (Crop) Loss 4.5421, Accuracy: (16.61, 28.94, 35.53), (Drop) Loss 4.7488, Accuracy: (14.05, 25.11, 31.41), Time 4.27
+2019-05-14 08:09:19,029: INFO: [train_wsdan.py:313]: 
+	Batch 4200: (Raw) Loss 4.3700, Accuracy: (19.45, 32.87, 39.83), (Crop) Loss 4.5008, Accuracy: (17.06, 29.58, 36.23), (Drop) Loss 4.7105, Accuracy: (14.43, 25.70, 32.07), Time 4.21
+2019-05-14 08:16:22,276: INFO: [train_wsdan.py:313]: 
+	Batch 4300: (Raw) Loss 4.3265, Accuracy: (19.96, 33.58, 40.59), (Crop) Loss 4.4603, Accuracy: (17.50, 30.21, 36.94), (Drop) Loss 4.6748, Accuracy: (14.75, 26.23, 32.68), Time 4.22
+2019-05-14 08:23:27,535: INFO: [train_wsdan.py:313]: 
+	Batch 4400: (Raw) Loss 4.2846, Accuracy: (20.48, 34.27, 41.32), (Crop) Loss 4.4224, Accuracy: (17.92, 30.79, 37.58), (Drop) Loss 4.6409, Accuracy: (15.09, 26.72, 33.24), Time 4.32
+2019-05-14 08:30:32,811: INFO: [train_wsdan.py:313]: 
+	Batch 4500: (Raw) Loss 4.2435, Accuracy: (20.96, 34.96, 42.05), (Crop) Loss 4.3847, Accuracy: (18.33, 31.39, 38.22), (Drop) Loss 4.6070, Accuracy: (15.43, 27.23, 33.84), Time 4.27
+2019-05-14 08:37:38,790: INFO: [train_wsdan.py:313]: 
+	Batch 4600: (Raw) Loss 4.2026, Accuracy: (21.47, 35.62, 42.76), (Crop) Loss 4.3461, Accuracy: (18.78, 32.00, 38.86), (Drop) Loss 4.5733, Accuracy: (15.80, 27.75, 34.40), Time 4.23
+2019-05-14 08:44:44,043: INFO: [train_wsdan.py:313]: 
+	Batch 4700: (Raw) Loss 4.1630, Accuracy: (21.95, 36.26, 43.44), (Crop) Loss 4.3106, Accuracy: (19.18, 32.53, 39.45), (Drop) Loss 4.5403, Accuracy: (16.13, 28.25, 34.97), Time 4.19
+2019-05-14 08:51:48,680: INFO: [train_wsdan.py:313]: 
+	Batch 4800: (Raw) Loss 4.1260, Accuracy: (22.37, 36.86, 44.09), (Crop) Loss 4.2764, Accuracy: (19.55, 33.07, 40.04), (Drop) Loss 4.5099, Accuracy: (16.44, 28.70, 35.47), Time 4.19
+2019-05-14 08:58:53,075: INFO: [train_wsdan.py:313]: 
+	Batch 4900: (Raw) Loss 4.0895, Accuracy: (22.80, 37.48, 44.74), (Crop) Loss 4.2427, Accuracy: (19.90, 33.61, 40.61), (Drop) Loss 4.4801, Accuracy: (16.75, 29.17, 35.97), Time 4.26
+2019-05-14 09:05:56,358: INFO: [train_wsdan.py:313]: 
+	Batch 5000: (Raw) Loss 4.0544, Accuracy: (23.24, 38.05, 45.35), (Crop) Loss 4.2099, Accuracy: (20.28, 34.13, 41.17), (Drop) Loss 4.4519, Accuracy: (17.06, 29.60, 36.46), Time 4.36
+2019-05-14 09:05:56,358: INFO: [train_wsdan.py:317]: saving the latest model from epoch 0
+2019-05-14 09:13:01,740: INFO: [train_wsdan.py:313]: 
+	Batch 5100: (Raw) Loss 4.0199, Accuracy: (23.68, 38.62, 45.94), (Crop) Loss 4.1780, Accuracy: (20.67, 34.66, 41.71), (Drop) Loss 4.4233, Accuracy: (17.37, 30.05, 36.95), Time 4.31
+2019-05-14 09:20:07,272: INFO: [train_wsdan.py:313]: 
+	Batch 5200: (Raw) Loss 3.9870, Accuracy: (24.10, 39.16, 46.51), (Crop) Loss 4.1478, Accuracy: (21.03, 35.14, 42.22), (Drop) Loss 4.3954, Accuracy: (17.68, 30.49, 37.43), Time 4.29
+2019-05-14 09:27:13,010: INFO: [train_wsdan.py:313]: 
+	Batch 5300: (Raw) Loss 3.9541, Accuracy: (24.51, 39.72, 47.09), (Crop) Loss 4.1170, Accuracy: (21.39, 35.63, 42.76), (Drop) Loss 4.3680, Accuracy: (18.00, 30.93, 37.90), Time 4.23
+2019-05-14 09:34:17,245: INFO: [train_wsdan.py:313]: 
+	Batch 5400: (Raw) Loss 3.9225, Accuracy: (24.92, 40.23, 47.63), (Crop) Loss 4.0873, Accuracy: (21.75, 36.09, 43.25), (Drop) Loss 4.3416, Accuracy: (18.29, 31.34, 38.35), Time 4.19
+2019-05-14 09:41:21,288: INFO: [train_wsdan.py:313]: 
+	Batch 5500: (Raw) Loss 3.8917, Accuracy: (25.33, 40.74, 48.16), (Crop) Loss 4.0597, Accuracy: (22.08, 36.52, 43.72), (Drop) Loss 4.3162, Accuracy: (18.57, 31.74, 38.79), Time 4.26
+2019-05-14 09:48:24,785: INFO: [train_wsdan.py:313]: 
+	Batch 5600: (Raw) Loss 3.8622, Accuracy: (25.69, 41.23, 48.68), (Crop) Loss 4.0322, Accuracy: (22.41, 36.95, 44.21), (Drop) Loss 4.2914, Accuracy: (18.84, 32.12, 39.21), Time 4.38
+2019-05-14 09:55:29,521: INFO: [train_wsdan.py:313]: 
+	Batch 5700: (Raw) Loss 3.8337, Accuracy: (26.06, 41.69, 49.16), (Crop) Loss 4.0062, Accuracy: (22.71, 37.36, 44.64), (Drop) Loss 4.2679, Accuracy: (19.08, 32.49, 39.61), Time 4.25
+2019-05-14 10:02:34,673: INFO: [train_wsdan.py:313]: 
+	Batch 5800: (Raw) Loss 3.8056, Accuracy: (26.40, 42.16, 49.64), (Crop) Loss 3.9796, Accuracy: (23.03, 37.78, 45.09), (Drop) Loss 4.2445, Accuracy: (19.32, 32.86, 40.02), Time 4.21
+2019-05-14 10:09:39,628: INFO: [train_wsdan.py:313]: 
+	Batch 5900: (Raw) Loss 3.7776, Accuracy: (26.76, 42.63, 50.13), (Crop) Loss 3.9536, Accuracy: (23.33, 38.19, 45.53), (Drop) Loss 4.2215, Accuracy: (19.57, 33.21, 40.42), Time 4.30
+2019-05-14 10:16:43,873: INFO: [train_wsdan.py:313]: 
+	Batch 6000: (Raw) Loss 3.7500, Accuracy: (27.13, 43.08, 50.58), (Crop) Loss 3.9286, Accuracy: (23.64, 38.59, 45.95), (Drop) Loss 4.1989, Accuracy: (19.84, 33.56, 40.81), Time 4.20
+2019-05-14 10:16:43,873: INFO: [train_wsdan.py:317]: saving the latest model from epoch 0
+2019-05-14 10:23:50,550: INFO: [train_wsdan.py:313]: 
+	Batch 6100: (Raw) Loss 3.7231, Accuracy: (27.49, 43.52, 51.04), (Crop) Loss 3.9037, Accuracy: (23.96, 38.98, 46.37), (Drop) Loss 4.1764, Accuracy: (20.11, 33.91, 41.19), Time 4.25
+2019-05-14 10:30:54,368: INFO: [train_wsdan.py:313]: 
+	Batch 6200: (Raw) Loss 3.6969, Accuracy: (27.85, 43.96, 51.50), (Crop) Loss 3.8797, Accuracy: (24.27, 39.39, 46.78), (Drop) Loss 4.1551, Accuracy: (20.36, 34.26, 41.55), Time 4.18
+2019-05-14 10:37:59,014: INFO: [train_wsdan.py:313]: 
+	Batch 6300: (Raw) Loss 3.6721, Accuracy: (28.17, 44.37, 51.93), (Crop) Loss 3.8576, Accuracy: (24.54, 39.75, 47.16), (Drop) Loss 4.1342, Accuracy: (20.62, 34.60, 41.91), Time 4.26
+2019-05-14 10:45:03,712: INFO: [train_wsdan.py:313]: 
+	Batch 6400: (Raw) Loss 3.6468, Accuracy: (28.51, 44.79, 52.36), (Crop) Loss 3.8341, Accuracy: (24.84, 40.13, 47.57), (Drop) Loss 4.1135, Accuracy: (20.86, 34.93, 42.26), Time 4.38
+2019-05-14 10:52:09,053: INFO: [train_wsdan.py:313]: 
+	Batch 6500: (Raw) Loss 3.6224, Accuracy: (28.84, 45.21, 52.79), (Crop) Loss 3.8114, Accuracy: (25.12, 40.50, 47.96), (Drop) Loss 4.0937, Accuracy: (21.10, 35.25, 42.60), Time 4.22
+2019-05-14 10:59:14,565: INFO: [train_wsdan.py:313]: 
+	Batch 6600: (Raw) Loss 3.5985, Accuracy: (29.16, 45.60, 53.21), (Crop) Loss 3.7897, Accuracy: (25.39, 40.86, 48.33), (Drop) Loss 4.0742, Accuracy: (21.33, 35.54, 42.90), Time 4.23
+2019-05-14 11:06:19,065: INFO: [train_wsdan.py:313]: 
+	Batch 6700: (Raw) Loss 3.5752, Accuracy: (29.47, 45.99, 53.60), (Crop) Loss 3.7682, Accuracy: (25.66, 41.22, 48.71), (Drop) Loss 4.0560, Accuracy: (21.52, 35.84, 43.23), Time 4.24
+2019-05-14 11:13:22,503: INFO: [train_wsdan.py:313]: 
+	Batch 6800: (Raw) Loss 3.5533, Accuracy: (29.76, 46.37, 53.98), (Crop) Loss 3.7482, Accuracy: (25.91, 41.55, 49.05), (Drop) Loss 4.0371, Accuracy: (21.75, 36.16, 43.56), Time 4.23
+2019-05-14 11:20:27,126: INFO: [train_wsdan.py:313]: 
+	Batch 6900: (Raw) Loss 3.5301, Accuracy: (30.07, 46.75, 54.37), (Crop) Loss 3.7274, Accuracy: (26.17, 41.90, 49.41), (Drop) Loss 4.0185, Accuracy: (21.97, 36.46, 43.89), Time 4.39
+2019-05-14 11:27:32,856: INFO: [train_wsdan.py:313]: 
+	Batch 7000: (Raw) Loss 3.5074, Accuracy: (30.39, 47.14, 54.76), (Crop) Loss 3.7064, Accuracy: (26.44, 42.25, 49.77), (Drop) Loss 3.9990, Accuracy: (22.20, 36.77, 44.22), Time 4.22
+2019-05-14 11:27:32,857: INFO: [train_wsdan.py:317]: saving the latest model from epoch 0
+2019-05-14 11:34:38,130: INFO: [train_wsdan.py:313]: 
+	Batch 7100: (Raw) Loss 3.4859, Accuracy: (30.70, 47.50, 55.14), (Crop) Loss 3.6863, Accuracy: (26.71, 42.58, 50.12), (Drop) Loss 3.9810, Accuracy: (22.42, 37.07, 44.55), Time 4.30
+2019-05-14 11:41:44,203: INFO: [train_wsdan.py:313]: 
+	Batch 7200: (Raw) Loss 3.4652, Accuracy: (30.98, 47.85, 55.49), (Crop) Loss 3.6673, Accuracy: (26.95, 42.88, 50.44), (Drop) Loss 3.9640, Accuracy: (22.62, 37.34, 44.84), Time 4.30
+2019-05-14 11:48:49,673: INFO: [train_wsdan.py:313]: 
+	Batch 7300: (Raw) Loss 3.4445, Accuracy: (31.27, 48.20, 55.84), (Crop) Loss 3.6481, Accuracy: (27.19, 43.19, 50.78), (Drop) Loss 3.9470, Accuracy: (22.81, 37.60, 45.12), Time 4.28
+2019-05-14 11:55:54,881: INFO: [train_wsdan.py:313]: 
+	Batch 7400: (Raw) Loss 3.4241, Accuracy: (31.55, 48.55, 56.18), (Crop) Loss 3.6296, Accuracy: (27.42, 43.50, 51.09), (Drop) Loss 3.9304, Accuracy: (23.01, 37.87, 45.40), Time 4.29
+2019-05-14 12:02:59,721: INFO: [train_wsdan.py:313]: 
+	Batch 7500: (Raw) Loss 3.4044, Accuracy: (31.83, 48.89, 56.54), (Crop) Loss 3.6110, Accuracy: (27.66, 43.81, 51.41), (Drop) Loss 3.9149, Accuracy: (23.19, 38.11, 45.67), Time 4.22
+2019-05-14 12:10:04,622: INFO: [train_wsdan.py:313]: 
+	Batch 7600: (Raw) Loss 3.3846, Accuracy: (32.12, 49.24, 56.88), (Crop) Loss 3.5930, Accuracy: (27.91, 44.11, 51.72), (Drop) Loss 3.8997, Accuracy: (23.37, 38.37, 45.93), Time 4.22
+2019-05-14 12:17:10,745: INFO: [train_wsdan.py:313]: 
+	Batch 7700: (Raw) Loss 3.3654, Accuracy: (32.39, 49.55, 57.20), (Crop) Loss 3.5753, Accuracy: (28.13, 44.41, 52.02), (Drop) Loss 3.8843, Accuracy: (23.57, 38.61, 46.18), Time 4.33
+2019-05-14 12:24:17,367: INFO: [train_wsdan.py:313]: 
+	Batch 7800: (Raw) Loss 3.3469, Accuracy: (32.64, 49.86, 57.51), (Crop) Loss 3.5578, Accuracy: (28.36, 44.71, 52.32), (Drop) Loss 3.8690, Accuracy: (23.76, 38.85, 46.45), Time 4.24
+2019-05-14 12:31:24,345: INFO: [train_wsdan.py:313]: 
+	Batch 7900: (Raw) Loss 3.3285, Accuracy: (32.90, 50.16, 57.82), (Crop) Loss 3.5406, Accuracy: (28.58, 44.99, 52.61), (Drop) Loss 3.8539, Accuracy: (23.94, 39.10, 46.71), Time 4.32
+2019-05-14 12:38:30,578: INFO: [train_wsdan.py:313]: 
+	Batch 8000: (Raw) Loss 3.3096, Accuracy: (33.17, 50.49, 58.13), (Crop) Loss 3.5230, Accuracy: (28.82, 45.28, 52.91), (Drop) Loss 3.8385, Accuracy: (24.12, 39.35, 46.96), Time 4.26
+2019-05-14 12:38:30,581: INFO: [train_wsdan.py:317]: saving the latest model from epoch 0
+2019-05-14 12:45:36,553: INFO: [train_wsdan.py:313]: 
+	Batch 8100: (Raw) Loss 3.2919, Accuracy: (33.41, 50.79, 58.43), (Crop) Loss 3.5064, Accuracy: (29.04, 45.56, 53.20), (Drop) Loss 3.8242, Accuracy: (24.29, 39.58, 47.20), Time 4.41
+2019-05-14 12:52:41,930: INFO: [train_wsdan.py:313]: 
+	Batch 8200: (Raw) Loss 3.2749, Accuracy: (33.65, 51.07, 58.72), (Crop) Loss 3.4908, Accuracy: (29.24, 45.80, 53.46), (Drop) Loss 3.8101, Accuracy: (24.47, 39.81, 47.45), Time 4.20
+2019-05-14 12:59:19,678: INFO: [train_wsdan.py:345]: Train: (Raw) Loss 3.2597, Accuracy: (33.86, 51.33, 58.97), (Crop) Loss 3.4768, Accuracy: (29.42, 46.03, 53.70), (Drop) Loss 3.7979, Accuracy: (24.63, 40.01, 47.66), Time 35243.77
+2019-05-14 13:01:12,236: INFO: [train_wsdan.py:438]: saving the best model from epoch 1
+2019-05-14 13:01:12,526: INFO: [train_wsdan.py:449]: Valid: Loss 2.51821,  Accuracy: Top-1 44.02, Top-3 66.76, Top-5 75.70, Time 112.34
+2019-05-14 13:01:12,536: INFO: [train_wsdan.py:203]: Epoch 002, Learning Rate 0.001
+2019-05-14 13:08:25,589: INFO: [train_wsdan.py:313]: 
+	Batch 100: (Raw) Loss 1.7044, Accuracy: (57.25, 78.09, 84.97), (Crop) Loss 2.0543, Accuracy: (48.50, 70.00, 77.47), (Drop) Loss 2.5246, Accuracy: (40.56, 60.91, 69.91), Time 4.20
+2019-05-14 13:15:30,041: INFO: [train_wsdan.py:313]: 
+	Batch 200: (Raw) Loss 1.7013, Accuracy: (57.33, 78.31, 85.14), (Crop) Loss 2.0406, Accuracy: (49.16, 70.34, 77.81), (Drop) Loss 2.5302, Accuracy: (40.72, 61.34, 69.78), Time 4.20
+2019-05-14 13:22:35,761: INFO: [train_wsdan.py:313]: 
+	Batch 300: (Raw) Loss 1.6933, Accuracy: (57.43, 78.38, 85.34), (Crop) Loss 2.0205, Accuracy: (49.43, 70.55, 78.14), (Drop) Loss 2.5106, Accuracy: (40.96, 61.65, 70.17), Time 4.35
+2019-05-14 13:29:40,530: INFO: [train_wsdan.py:313]: 
+	Batch 400: (Raw) Loss 1.6881, Accuracy: (57.50, 78.45, 85.35), (Crop) Loss 2.0168, Accuracy: (49.69, 70.55, 78.31), (Drop) Loss 2.5192, Accuracy: (40.91, 61.23, 69.94), Time 4.19
+2019-05-14 13:36:45,903: INFO: [train_wsdan.py:313]: 
+	Batch 500: (Raw) Loss 1.6889, Accuracy: (57.41, 78.38, 85.38), (Crop) Loss 2.0102, Accuracy: (49.77, 70.62, 78.43), (Drop) Loss 2.5280, Accuracy: (40.61, 61.24, 69.79), Time 4.32
+2019-05-14 13:43:51,948: INFO: [train_wsdan.py:313]: 
+	Batch 600: (Raw) Loss 1.6879, Accuracy: (57.28, 78.29, 85.31), (Crop) Loss 2.0115, Accuracy: (49.79, 70.44, 78.20), (Drop) Loss 2.5231, Accuracy: (40.68, 61.20, 69.54), Time 4.20
+2019-05-14 13:50:57,045: INFO: [train_wsdan.py:313]: 
+	Batch 700: (Raw) Loss 1.6854, Accuracy: (57.32, 78.21, 85.20), (Crop) Loss 2.0068, Accuracy: (49.81, 70.41, 78.15), (Drop) Loss 2.5250, Accuracy: (40.65, 61.14, 69.43), Time 4.24
+2019-05-14 13:58:02,267: INFO: [train_wsdan.py:313]: 
+	Batch 800: (Raw) Loss 1.6916, Accuracy: (57.27, 78.27, 85.15), (Crop) Loss 2.0166, Accuracy: (49.59, 70.21, 77.98), (Drop) Loss 2.5294, Accuracy: (40.66, 61.08, 69.36), Time 4.27
+2019-05-14 14:05:07,041: INFO: [train_wsdan.py:313]: 
+	Batch 900: (Raw) Loss 1.6912, Accuracy: (57.29, 78.33, 85.25), (Crop) Loss 2.0126, Accuracy: (49.60, 70.24, 78.09), (Drop) Loss 2.5273, Accuracy: (40.58, 61.00, 69.32), Time 4.23
+2019-05-14 14:12:11,258: INFO: [train_wsdan.py:313]: 
+	Batch 1000: (Raw) Loss 1.6881, Accuracy: (57.44, 78.38, 85.24), (Crop) Loss 2.0110, Accuracy: (49.71, 70.28, 78.06), (Drop) Loss 2.5157, Accuracy: (40.77, 61.11, 69.47), Time 4.25
+2019-05-14 14:12:11,258: INFO: [train_wsdan.py:317]: saving the latest model from epoch 1
+2019-05-14 14:19:15,858: INFO: [train_wsdan.py:313]: 
+	Batch 1100: (Raw) Loss 1.6833, Accuracy: (57.50, 78.40, 85.28), (Crop) Loss 2.0047, Accuracy: (49.81, 70.39, 78.13), (Drop) Loss 2.5209, Accuracy: (40.65, 60.99, 69.41), Time 4.18
+2019-05-14 14:26:20,708: INFO: [train_wsdan.py:313]: 
+	Batch 1200: (Raw) Loss 1.6848, Accuracy: (57.54, 78.33, 85.20), (Crop) Loss 2.0093, Accuracy: (49.72, 70.29, 78.09), (Drop) Loss 2.5272, Accuracy: (40.62, 60.86, 69.23), Time 4.22
+2019-05-14 14:33:25,631: INFO: [train_wsdan.py:313]: 
+	Batch 1300: (Raw) Loss 1.6798, Accuracy: (57.62, 78.48, 85.33), (Crop) Loss 2.0042, Accuracy: (49.81, 70.38, 78.13), (Drop) Loss 2.5234, Accuracy: (40.75, 60.98, 69.27), Time 4.23
+2019-05-14 14:40:29,496: INFO: [train_wsdan.py:313]: 
+	Batch 1400: (Raw) Loss 1.6787, Accuracy: (57.61, 78.46, 85.33), (Crop) Loss 2.0011, Accuracy: (49.90, 70.48, 78.22), (Drop) Loss 2.5223, Accuracy: (40.84, 61.04, 69.32), Time 4.21
+2019-05-14 14:47:35,608: INFO: [train_wsdan.py:313]: 
+	Batch 1500: (Raw) Loss 1.6794, Accuracy: (57.65, 78.42, 85.29), (Crop) Loss 2.0007, Accuracy: (49.96, 70.53, 78.21), (Drop) Loss 2.5236, Accuracy: (40.86, 61.05, 69.33), Time 4.36
+2019-05-14 14:54:42,176: INFO: [train_wsdan.py:313]: 
+	Batch 1600: (Raw) Loss 1.6764, Accuracy: (57.75, 78.46, 85.29), (Crop) Loss 1.9994, Accuracy: (50.02, 70.55, 78.26), (Drop) Loss 2.5199, Accuracy: (40.96, 61.06, 69.38), Time 4.26
+2019-05-14 15:01:48,073: INFO: [train_wsdan.py:313]: 
+	Batch 1700: (Raw) Loss 1.6756, Accuracy: (57.71, 78.48, 85.31), (Crop) Loss 1.9964, Accuracy: (50.07, 70.63, 78.35), (Drop) Loss 2.5200, Accuracy: (40.95, 61.06, 69.36), Time 4.30
+2019-05-14 15:08:53,273: INFO: [train_wsdan.py:313]: 
+	Batch 1800: (Raw) Loss 1.6735, Accuracy: (57.84, 78.49, 85.32), (Crop) Loss 1.9952, Accuracy: (50.15, 70.68, 78.40), (Drop) Loss 2.5216, Accuracy: (40.96, 61.02, 69.34), Time 4.28
+2019-05-14 15:15:58,430: INFO: [train_wsdan.py:313]: 
+	Batch 1900: (Raw) Loss 1.6740, Accuracy: (57.78, 78.45, 85.30), (Crop) Loss 1.9939, Accuracy: (50.11, 70.69, 78.43), (Drop) Loss 2.5243, Accuracy: (40.94, 60.97, 69.27), Time 4.25
+2019-05-14 15:23:02,754: INFO: [train_wsdan.py:313]: 
+	Batch 2000: (Raw) Loss 1.6707, Accuracy: (57.85, 78.52, 85.35), (Crop) Loss 1.9914, Accuracy: (50.17, 70.75, 78.48), (Drop) Loss 2.5206, Accuracy: (40.99, 61.01, 69.32), Time 4.22
+2019-05-14 15:23:02,754: INFO: [train_wsdan.py:317]: saving the latest model from epoch 1
+2019-05-14 15:30:09,553: INFO: [train_wsdan.py:313]: 
+	Batch 2100: (Raw) Loss 1.6693, Accuracy: (57.86, 78.56, 85.38), (Crop) Loss 1.9918, Accuracy: (50.16, 70.73, 78.47), (Drop) Loss 2.5179, Accuracy: (41.06, 61.11, 69.40), Time 4.23
+2019-05-14 15:37:14,465: INFO: [train_wsdan.py:313]: 
+	Batch 2200: (Raw) Loss 1.6665, Accuracy: (57.96, 78.62, 85.42), (Crop) Loss 1.9883, Accuracy: (50.26, 70.79, 78.53), (Drop) Loss 2.5159, Accuracy: (41.09, 61.14, 69.46), Time 4.34
+2019-05-14 15:44:20,346: INFO: [train_wsdan.py:313]: 
+	Batch 2300: (Raw) Loss 1.6613, Accuracy: (58.06, 78.72, 85.52), (Crop) Loss 1.9827, Accuracy: (50.34, 70.93, 78.67), (Drop) Loss 2.5123, Accuracy: (41.17, 61.23, 69.54), Time 4.25
+2019-05-14 15:51:26,354: INFO: [train_wsdan.py:313]: 
+	Batch 2400: (Raw) Loss 1.6606, Accuracy: (58.06, 78.75, 85.55), (Crop) Loss 1.9817, Accuracy: (50.41, 70.98, 78.70), (Drop) Loss 2.5105, Accuracy: (41.19, 61.26, 69.55), Time 4.28
+2019-05-14 15:58:32,776: INFO: [train_wsdan.py:313]: 
+	Batch 2500: (Raw) Loss 1.6574, Accuracy: (58.15, 78.83, 85.58), (Crop) Loss 1.9793, Accuracy: (50.46, 71.06, 78.75), (Drop) Loss 2.5098, Accuracy: (41.24, 61.31, 69.56), Time 4.28
+2019-05-14 16:05:39,311: INFO: [train_wsdan.py:313]: 
+	Batch 2600: (Raw) Loss 1.6564, Accuracy: (58.18, 78.85, 85.59), (Crop) Loss 1.9784, Accuracy: (50.49, 71.08, 78.73), (Drop) Loss 2.5118, Accuracy: (41.26, 61.28, 69.52), Time 4.25
+2019-05-14 16:12:45,100: INFO: [train_wsdan.py:313]: 
+	Batch 2700: (Raw) Loss 1.6532, Accuracy: (58.25, 78.89, 85.62), (Crop) Loss 1.9755, Accuracy: (50.56, 71.11, 78.77), (Drop) Loss 2.5123, Accuracy: (41.31, 61.29, 69.48), Time 4.32
+2019-05-14 16:19:50,505: INFO: [train_wsdan.py:313]: 
+	Batch 2800: (Raw) Loss 1.6498, Accuracy: (58.34, 78.94, 85.67), (Crop) Loss 1.9727, Accuracy: (50.62, 71.17, 78.82), (Drop) Loss 2.5095, Accuracy: (41.39, 61.39, 69.56), Time 4.21
+2019-05-14 16:26:55,102: INFO: [train_wsdan.py:313]: 
+	Batch 2900: (Raw) Loss 1.6474, Accuracy: (58.40, 78.99, 85.70), (Crop) Loss 1.9700, Accuracy: (50.65, 71.25, 78.86), (Drop) Loss 2.5081, Accuracy: (41.43, 61.40, 69.57), Time 4.27
+2019-05-14 16:33:58,706: INFO: [train_wsdan.py:313]: 
+	Batch 3000: (Raw) Loss 1.6455, Accuracy: (58.42, 79.03, 85.72), (Crop) Loss 1.9683, Accuracy: (50.66, 71.27, 78.87), (Drop) Loss 2.5071, Accuracy: (41.43, 61.40, 69.58), Time 4.21
+2019-05-14 16:33:58,707: INFO: [train_wsdan.py:317]: saving the latest model from epoch 1
+2019-05-14 16:41:03,863: INFO: [train_wsdan.py:313]: 
+	Batch 3100: (Raw) Loss 1.6425, Accuracy: (58.48, 79.08, 85.78), (Crop) Loss 1.9660, Accuracy: (50.72, 71.32, 78.95), (Drop) Loss 2.5057, Accuracy: (41.46, 61.40, 69.59), Time 4.20
+2019-05-14 16:48:06,164: INFO: [train_wsdan.py:313]: 
+	Batch 3200: (Raw) Loss 1.6412, Accuracy: (58.50, 79.12, 85.79), (Crop) Loss 1.9651, Accuracy: (50.74, 71.34, 78.95), (Drop) Loss 2.5056, Accuracy: (41.47, 61.40, 69.59), Time 4.27
+2019-05-14 16:55:09,630: INFO: [train_wsdan.py:313]: 
+	Batch 3300: (Raw) Loss 1.6377, Accuracy: (58.61, 79.18, 85.85), (Crop) Loss 1.9614, Accuracy: (50.85, 71.39, 78.98), (Drop) Loss 2.5032, Accuracy: (41.52, 61.42, 69.62), Time 4.19
+2019-05-14 17:02:12,618: INFO: [train_wsdan.py:313]: 
+	Batch 3400: (Raw) Loss 1.6351, Accuracy: (58.65, 79.21, 85.86), (Crop) Loss 1.9584, Accuracy: (50.91, 71.47, 79.02), (Drop) Loss 2.5032, Accuracy: (41.52, 61.39, 69.60), Time 4.29
+2019-05-14 17:09:16,940: INFO: [train_wsdan.py:313]: 
+	Batch 3500: (Raw) Loss 1.6319, Accuracy: (58.72, 79.26, 85.90), (Crop) Loss 1.9542, Accuracy: (50.97, 71.53, 79.08), (Drop) Loss 2.5016, Accuracy: (41.59, 61.41, 69.61), Time 4.28
+2019-05-14 17:16:22,515: INFO: [train_wsdan.py:313]: 
+	Batch 3600: (Raw) Loss 1.6296, Accuracy: (58.76, 79.31, 85.94), (Crop) Loss 1.9512, Accuracy: (51.03, 71.58, 79.14), (Drop) Loss 2.5031, Accuracy: (41.55, 61.39, 69.60), Time 4.22
+2019-05-14 17:23:26,371: INFO: [train_wsdan.py:313]: 
+	Batch 3700: (Raw) Loss 1.6263, Accuracy: (58.84, 79.37, 85.99), (Crop) Loss 1.9483, Accuracy: (51.07, 71.65, 79.17), (Drop) Loss 2.5014, Accuracy: (41.59, 61.39, 69.62), Time 4.31
+2019-05-14 17:30:30,376: INFO: [train_wsdan.py:313]: 
+	Batch 3800: (Raw) Loss 1.6241, Accuracy: (58.89, 79.39, 86.00), (Crop) Loss 1.9455, Accuracy: (51.13, 71.69, 79.19), (Drop) Loss 2.5001, Accuracy: (41.62, 61.42, 69.62), Time 4.25
+2019-05-14 17:37:34,665: INFO: [train_wsdan.py:313]: 
+	Batch 3900: (Raw) Loss 1.6233, Accuracy: (58.90, 79.39, 86.00), (Crop) Loss 1.9451, Accuracy: (51.16, 71.70, 79.19), (Drop) Loss 2.4998, Accuracy: (41.66, 61.43, 69.61), Time 4.34
+2019-05-14 17:44:39,489: INFO: [train_wsdan.py:313]: 
+	Batch 4000: (Raw) Loss 1.6216, Accuracy: (58.95, 79.42, 86.01), (Crop) Loss 1.9428, Accuracy: (51.22, 71.75, 79.22), (Drop) Loss 2.5004, Accuracy: (41.68, 61.42, 69.60), Time 4.21
+2019-05-14 17:44:39,490: INFO: [train_wsdan.py:317]: saving the latest model from epoch 1
+2019-05-14 17:51:44,756: INFO: [train_wsdan.py:313]: 
+	Batch 4100: (Raw) Loss 1.6202, Accuracy: (58.99, 79.45, 86.04), (Crop) Loss 1.9405, Accuracy: (51.27, 71.81, 79.27), (Drop) Loss 2.5008, Accuracy: (41.68, 61.40, 69.55), Time 4.24
+2019-05-14 17:58:48,530: INFO: [train_wsdan.py:313]: 
+	Batch 4200: (Raw) Loss 1.6174, Accuracy: (59.06, 79.50, 86.06), (Crop) Loss 1.9377, Accuracy: (51.33, 71.84, 79.29), (Drop) Loss 2.5006, Accuracy: (41.70, 61.41, 69.56), Time 4.21
+2019-05-14 18:05:53,057: INFO: [train_wsdan.py:313]: 
+	Batch 4300: (Raw) Loss 1.6159, Accuracy: (59.09, 79.51, 86.09), (Crop) Loss 1.9363, Accuracy: (51.35, 71.86, 79.31), (Drop) Loss 2.5015, Accuracy: (41.71, 61.39, 69.53), Time 4.25
+2019-05-14 18:12:56,976: INFO: [train_wsdan.py:313]: 
+	Batch 4400: (Raw) Loss 1.6135, Accuracy: (59.15, 79.54, 86.11), (Crop) Loss 1.9340, Accuracy: (51.43, 71.90, 79.34), (Drop) Loss 2.5001, Accuracy: (41.77, 61.42, 69.55), Time 4.35
+2019-05-14 18:20:00,445: INFO: [train_wsdan.py:313]: 
+	Batch 4500: (Raw) Loss 1.6111, Accuracy: (59.20, 79.57, 86.13), (Crop) Loss 1.9314, Accuracy: (51.45, 71.94, 79.37), (Drop) Loss 2.4993, Accuracy: (41.78, 61.43, 69.55), Time 4.19
+2019-05-14 18:27:04,193: INFO: [train_wsdan.py:313]: 
+	Batch 4600: (Raw) Loss 1.6090, Accuracy: (59.24, 79.61, 86.16), (Crop) Loss 1.9291, Accuracy: (51.49, 71.99, 79.42), (Drop) Loss 2.4975, Accuracy: (41.82, 61.48, 69.59), Time 4.27
+2019-05-14 18:34:08,089: INFO: [train_wsdan.py:313]: 
+	Batch 4700: (Raw) Loss 1.6073, Accuracy: (59.28, 79.66, 86.19), (Crop) Loss 1.9276, Accuracy: (51.51, 72.00, 79.44), (Drop) Loss 2.4959, Accuracy: (41.84, 61.51, 69.63), Time 4.32
+2019-05-14 18:41:12,515: INFO: [train_wsdan.py:313]: 
+	Batch 4800: (Raw) Loss 1.6040, Accuracy: (59.35, 79.71, 86.22), (Crop) Loss 1.9243, Accuracy: (51.57, 72.05, 79.51), (Drop) Loss 2.4933, Accuracy: (41.87, 61.56, 69.66), Time 4.25
+2019-05-14 18:48:16,190: INFO: [train_wsdan.py:313]: 
+	Batch 4900: (Raw) Loss 1.6012, Accuracy: (59.40, 79.74, 86.25), (Crop) Loss 1.9207, Accuracy: (51.62, 72.11, 79.57), (Drop) Loss 2.4909, Accuracy: (41.90, 61.60, 69.69), Time 4.24
+2019-05-14 18:55:20,594: INFO: [train_wsdan.py:313]: 
+	Batch 5000: (Raw) Loss 1.5985, Accuracy: (59.48, 79.77, 86.29), (Crop) Loss 1.9174, Accuracy: (51.71, 72.17, 79.61), (Drop) Loss 2.4893, Accuracy: (41.94, 61.63, 69.72), Time 4.22
+2019-05-14 18:55:20,594: INFO: [train_wsdan.py:317]: saving the latest model from epoch 1
+2019-05-14 19:02:26,115: INFO: [train_wsdan.py:313]: 
+	Batch 5100: (Raw) Loss 1.5962, Accuracy: (59.55, 79.81, 86.31), (Crop) Loss 1.9147, Accuracy: (51.75, 72.22, 79.66), (Drop) Loss 2.4874, Accuracy: (42.01, 61.67, 69.74), Time 4.35
+2019-05-14 19:09:31,159: INFO: [train_wsdan.py:313]: 
+	Batch 5200: (Raw) Loss 1.5932, Accuracy: (59.61, 79.85, 86.35), (Crop) Loss 1.9114, Accuracy: (51.81, 72.27, 79.68), (Drop) Loss 2.4866, Accuracy: (42.04, 61.66, 69.74), Time 4.18
+2019-05-14 19:16:35,319: INFO: [train_wsdan.py:313]: 
+	Batch 5300: (Raw) Loss 1.5916, Accuracy: (59.65, 79.88, 86.37), (Crop) Loss 1.9091, Accuracy: (51.85, 72.32, 79.73), (Drop) Loss 2.4865, Accuracy: (42.05, 61.69, 69.76), Time 4.15
+2019-05-14 19:23:38,608: INFO: [train_wsdan.py:313]: 
+	Batch 5400: (Raw) Loss 1.5896, Accuracy: (59.71, 79.91, 86.40), (Crop) Loss 1.9064, Accuracy: (51.92, 72.37, 79.76), (Drop) Loss 2.4844, Accuracy: (42.10, 61.73, 69.80), Time 4.16
+2019-05-14 19:30:41,614: INFO: [train_wsdan.py:313]: 
+	Batch 5500: (Raw) Loss 1.5869, Accuracy: (59.78, 79.94, 86.44), (Crop) Loss 1.9040, Accuracy: (51.97, 72.43, 79.82), (Drop) Loss 2.4822, Accuracy: (42.14, 61.76, 69.82), Time 4.13
+2019-05-14 19:37:43,931: INFO: [train_wsdan.py:313]: 
+	Batch 5600: (Raw) Loss 1.5848, Accuracy: (59.83, 79.98, 86.47), (Crop) Loss 1.9017, Accuracy: (52.01, 72.48, 79.86), (Drop) Loss 2.4800, Accuracy: (42.19, 61.79, 69.85), Time 4.30
+2019-05-14 19:44:45,898: INFO: [train_wsdan.py:313]: 
+	Batch 5700: (Raw) Loss 1.5826, Accuracy: (59.86, 80.02, 86.50), (Crop) Loss 1.8998, Accuracy: (52.06, 72.51, 79.89), (Drop) Loss 2.4788, Accuracy: (42.22, 61.80, 69.86), Time 4.17
+2019-05-14 19:51:49,034: INFO: [train_wsdan.py:313]: 
+	Batch 5800: (Raw) Loss 1.5812, Accuracy: (59.88, 80.03, 86.51), (Crop) Loss 1.8984, Accuracy: (52.09, 72.55, 79.92), (Drop) Loss 2.4792, Accuracy: (42.24, 61.80, 69.85), Time 4.27
+2019-05-14 19:58:51,251: INFO: [train_wsdan.py:313]: 
+	Batch 5900: (Raw) Loss 1.5790, Accuracy: (59.93, 80.07, 86.54), (Crop) Loss 1.8959, Accuracy: (52.15, 72.60, 79.95), (Drop) Loss 2.4784, Accuracy: (42.27, 61.80, 69.86), Time 4.18
+2019-05-14 20:05:55,102: INFO: [train_wsdan.py:313]: 
+	Batch 6000: (Raw) Loss 1.5766, Accuracy: (59.98, 80.12, 86.57), (Crop) Loss 1.8931, Accuracy: (52.21, 72.66, 80.01), (Drop) Loss 2.4774, Accuracy: (42.32, 61.84, 69.89), Time 4.33
+2019-05-14 20:05:55,103: INFO: [train_wsdan.py:317]: saving the latest model from epoch 1
+2019-05-14 20:12:58,322: INFO: [train_wsdan.py:313]: 
+	Batch 6100: (Raw) Loss 1.5743, Accuracy: (60.02, 80.15, 86.60), (Crop) Loss 1.8913, Accuracy: (52.24, 72.67, 80.03), (Drop) Loss 2.4760, Accuracy: (42.35, 61.86, 69.90), Time 4.19
+2019-05-14 20:20:01,983: INFO: [train_wsdan.py:313]: 
+	Batch 6200: (Raw) Loss 1.5716, Accuracy: (60.07, 80.18, 86.63), (Crop) Loss 1.8883, Accuracy: (52.30, 72.73, 80.08), (Drop) Loss 2.4734, Accuracy: (42.40, 61.90, 69.95), Time 4.25
+2019-05-14 20:27:07,620: INFO: [train_wsdan.py:313]: 
+	Batch 6300: (Raw) Loss 1.5693, Accuracy: (60.14, 80.21, 86.66), (Crop) Loss 1.8861, Accuracy: (52.35, 72.77, 80.11), (Drop) Loss 2.4729, Accuracy: (42.44, 61.92, 69.95), Time 4.30
+2019-05-14 20:34:12,668: INFO: [train_wsdan.py:313]: 
+	Batch 6400: (Raw) Loss 1.5673, Accuracy: (60.18, 80.25, 86.68), (Crop) Loss 1.8840, Accuracy: (52.39, 72.81, 80.14), (Drop) Loss 2.4713, Accuracy: (42.49, 61.96, 69.98), Time 4.21
+2019-05-14 20:41:15,734: INFO: [train_wsdan.py:313]: 
+	Batch 6500: (Raw) Loss 1.5649, Accuracy: (60.24, 80.29, 86.71), (Crop) Loss 1.8815, Accuracy: (52.46, 72.86, 80.17), (Drop) Loss 2.4695, Accuracy: (42.53, 62.00, 70.00), Time 4.24
+2019-05-14 20:48:19,616: INFO: [train_wsdan.py:313]: 
+	Batch 6600: (Raw) Loss 1.5629, Accuracy: (60.28, 80.32, 86.74), (Crop) Loss 1.8794, Accuracy: (52.49, 72.90, 80.21), (Drop) Loss 2.4688, Accuracy: (42.54, 62.01, 70.00), Time 4.18
+2019-05-14 20:55:23,105: INFO: [train_wsdan.py:313]: 
+	Batch 6700: (Raw) Loss 1.5612, Accuracy: (60.32, 80.35, 86.77), (Crop) Loss 1.8778, Accuracy: (52.53, 72.92, 80.24), (Drop) Loss 2.4696, Accuracy: (42.55, 62.00, 70.00), Time 4.14
+2019-05-14 21:02:26,566: INFO: [train_wsdan.py:313]: 
+	Batch 6800: (Raw) Loss 1.5596, Accuracy: (60.35, 80.37, 86.79), (Crop) Loss 1.8762, Accuracy: (52.57, 72.94, 80.25), (Drop) Loss 2.4709, Accuracy: (42.54, 61.98, 69.97), Time 4.24
+2019-05-14 21:09:31,148: INFO: [train_wsdan.py:313]: 
+	Batch 6900: (Raw) Loss 1.5570, Accuracy: (60.41, 80.41, 86.81), (Crop) Loss 1.8738, Accuracy: (52.64, 72.99, 80.28), (Drop) Loss 2.4703, Accuracy: (42.57, 62.00, 69.97), Time 4.32
+2019-05-14 21:16:35,972: INFO: [train_wsdan.py:313]: 
+	Batch 7000: (Raw) Loss 1.5553, Accuracy: (60.45, 80.43, 86.83), (Crop) Loss 1.8722, Accuracy: (52.69, 73.02, 80.30), (Drop) Loss 2.4702, Accuracy: (42.58, 62.02, 69.97), Time 4.41
+2019-05-14 21:16:35,973: INFO: [train_wsdan.py:317]: saving the latest model from epoch 1
+2019-05-14 21:23:40,851: INFO: [train_wsdan.py:313]: 
+	Batch 7100: (Raw) Loss 1.5540, Accuracy: (60.48, 80.46, 86.85), (Crop) Loss 1.8711, Accuracy: (52.73, 73.03, 80.31), (Drop) Loss 2.4700, Accuracy: (42.60, 62.03, 69.98), Time 4.25
+2019-05-14 21:30:45,482: INFO: [train_wsdan.py:313]: 
+	Batch 7200: (Raw) Loss 1.5515, Accuracy: (60.55, 80.51, 86.88), (Crop) Loss 1.8694, Accuracy: (52.76, 73.07, 80.33), (Drop) Loss 2.4691, Accuracy: (42.64, 62.05, 69.99), Time 4.23
+2019-05-14 21:37:48,710: INFO: [train_wsdan.py:313]: 
+	Batch 7300: (Raw) Loss 1.5491, Accuracy: (60.59, 80.55, 86.91), (Crop) Loss 1.8670, Accuracy: (52.81, 73.12, 80.37), (Drop) Loss 2.4689, Accuracy: (42.65, 62.07, 69.99), Time 4.33
+2019-05-14 21:44:51,929: INFO: [train_wsdan.py:313]: 
+	Batch 7400: (Raw) Loss 1.5473, Accuracy: (60.64, 80.59, 86.93), (Crop) Loss 1.8653, Accuracy: (52.86, 73.16, 80.40), (Drop) Loss 2.4690, Accuracy: (42.66, 62.06, 69.98), Time 4.27
+2019-05-14 21:51:55,983: INFO: [train_wsdan.py:313]: 
+	Batch 7500: (Raw) Loss 1.5449, Accuracy: (60.69, 80.62, 86.96), (Crop) Loss 1.8624, Accuracy: (52.91, 73.21, 80.45), (Drop) Loss 2.4696, Accuracy: (42.66, 62.06, 69.97), Time 4.22
+2019-05-14 21:59:00,178: INFO: [train_wsdan.py:313]: 
+	Batch 7600: (Raw) Loss 1.5427, Accuracy: (60.74, 80.66, 86.99), (Crop) Loss 1.8601, Accuracy: (52.96, 73.25, 80.49), (Drop) Loss 2.4701, Accuracy: (42.66, 62.05, 69.96), Time 4.17
+2019-05-14 22:06:04,514: INFO: [train_wsdan.py:313]: 
+	Batch 7700: (Raw) Loss 1.5405, Accuracy: (60.79, 80.69, 87.01), (Crop) Loss 1.8579, Accuracy: (53.01, 73.29, 80.51), (Drop) Loss 2.4700, Accuracy: (42.67, 62.04, 69.96), Time 4.25
+2019-05-14 22:13:09,109: INFO: [train_wsdan.py:313]: 
+	Batch 7800: (Raw) Loss 1.5386, Accuracy: (60.84, 80.72, 87.04), (Crop) Loss 1.8556, Accuracy: (53.06, 73.33, 80.54), (Drop) Loss 2.4705, Accuracy: (42.68, 62.04, 69.94), Time 4.19
+2019-05-14 22:20:13,974: INFO: [train_wsdan.py:313]: 
+	Batch 7900: (Raw) Loss 1.5360, Accuracy: (60.91, 80.76, 87.07), (Crop) Loss 1.8528, Accuracy: (53.12, 73.37, 80.58), (Drop) Loss 2.4700, Accuracy: (42.72, 62.04, 69.94), Time 4.23
+2019-05-14 22:27:17,769: INFO: [train_wsdan.py:313]: 
+	Batch 8000: (Raw) Loss 1.5345, Accuracy: (60.96, 80.79, 87.08), (Crop) Loss 1.8509, Accuracy: (53.16, 73.41, 80.62), (Drop) Loss 2.4706, Accuracy: (42.73, 62.02, 69.92), Time 4.21
+2019-05-14 22:27:17,770: INFO: [train_wsdan.py:317]: saving the latest model from epoch 1
+2019-05-14 22:34:24,766: INFO: [train_wsdan.py:313]: 
+	Batch 8100: (Raw) Loss 1.5327, Accuracy: (60.99, 80.82, 87.11), (Crop) Loss 1.8491, Accuracy: (53.20, 73.45, 80.65), (Drop) Loss 2.4717, Accuracy: (42.73, 62.01, 69.90), Time 4.24
+2019-05-14 22:41:29,106: INFO: [train_wsdan.py:313]: 
+	Batch 8200: (Raw) Loss 1.5309, Accuracy: (61.03, 80.85, 87.13), (Crop) Loss 1.8472, Accuracy: (53.24, 73.48, 80.68), (Drop) Loss 2.4728, Accuracy: (42.73, 62.00, 69.88), Time 4.29
+2019-05-14 22:47:42,327: INFO: [train_wsdan.py:345]: Train: (Raw) Loss 1.5297, Accuracy: (61.06, 80.87, 87.15), (Crop) Loss 1.8460, Accuracy: (53.27, 73.51, 80.70), (Drop) Loss 2.4730, Accuracy: (42.74, 61.99, 69.88), Time 35189.79
+2019-05-14 22:49:22,652: INFO: [train_wsdan.py:438]: saving the best model from epoch 2
+2019-05-14 22:49:24,410: INFO: [train_wsdan.py:449]: Valid: Loss 1.91150,  Accuracy: Top-1 54.85, Top-3 76.35, Top-5 83.62, Time 100.21
+2019-05-14 22:49:24,419: INFO: [train_wsdan.py:203]: Epoch 003, Learning Rate 0.001
+2019-05-17 08:11:10,823: INFO: [wsdan.py:82]: WSDAN: using inception as feature extractor
+2019-05-17 08:19:17,727: INFO: [wsdan.py:82]: WSDAN: using inception as feature extractor
+2019-05-17 08:19:25,831: INFO: [wsdan.py:122]: WSDAN: All params loaded
+2019-05-17 08:19:25,904: INFO: [train_wsdan.py:103]: Network loaded from ./saved_models/latest.ckpt
+2019-05-17 08:19:25,929: INFO: [train_wsdan.py:110]: feature_center loaded from ./saved_models/latest.ckpt
+2019-05-17 08:19:28,236: INFO: [train_wsdan.py:151]: 
+Start training: Total epochs: 20, Batch size: 32, Training size: 265213, Validation size: 3030
+2019-05-17 08:22:50,359: INFO: [wsdan.py:82]: WSDAN: using inception as feature extractor
+2019-05-17 08:22:52,568: INFO: [wsdan.py:122]: WSDAN: All params loaded
+2019-05-17 08:22:52,620: INFO: [train_wsdan.py:103]: Network loaded from ./saved_models/latest.ckpt
+2019-05-17 08:22:52,636: INFO: [train_wsdan.py:110]: feature_center loaded from ./saved_models/latest.ckpt
+2019-05-17 08:22:53,702: INFO: [train_wsdan.py:151]: 
+Start training: Total epochs: 20, Batch size: 32, Training size: 265213, Validation size: 3030
+2019-05-17 08:24:58,484: INFO: [wsdan.py:82]: WSDAN: using inception as feature extractor
+2019-05-17 08:25:00,683: INFO: [wsdan.py:122]: WSDAN: All params loaded
+2019-05-17 08:25:00,734: INFO: [train_wsdan.py:103]: Network loaded from ./saved_models/latest.ckpt
+2019-05-17 08:25:00,750: INFO: [train_wsdan.py:110]: feature_center loaded from ./saved_models/latest.ckpt
+2019-05-17 08:25:01,822: INFO: [train_wsdan.py:151]: 
+Start training: Total epochs: 20, Batch size: 32, Training size: 265213, Validation size: 3030
+2019-05-17 08:25:01,822: INFO: [train_wsdan.py:215]: Epoch 002, Learning Rate 0.001
+2019-05-17 08:31:30,002: INFO: [train_wsdan.py:325]: 
+	Batch 100: (Raw) Loss 6.7806, Accuracy: (1.66, 2.56, 3.41), (Crop) Loss 6.5194, Accuracy: (2.56, 4.16, 5.50), (Drop) Loss 6.4716, Accuracy: (2.69, 4.72, 6.19), Time 3.40
+2019-05-17 08:37:54,934: INFO: [wsdan.py:82]: WSDAN: using inception as feature extractor
+2019-05-17 08:37:59,202: INFO: [wsdan.py:122]: WSDAN: All params loaded
+2019-05-17 08:37:59,255: INFO: [train_wsdan.py:103]: Network loaded from ./saved_models/latest.ckpt
+2019-05-17 08:37:59,271: INFO: [train_wsdan.py:110]: feature_center loaded from ./saved_models/latest.ckpt
+2019-05-17 08:38:01,111: INFO: [train_wsdan.py:151]: 
+Start training: Total epochs: 20, Batch size: 32, Training size: 265213, Validation size: 3030
+2019-05-17 08:39:15,524: INFO: [wsdan.py:82]: WSDAN: using inception as feature extractor
+2019-05-17 08:39:17,752: INFO: [wsdan.py:122]: WSDAN: All params loaded
+2019-05-17 08:39:17,803: INFO: [train_wsdan.py:103]: Network loaded from ./saved_models/latest.ckpt
+2019-05-17 08:39:17,819: INFO: [train_wsdan.py:110]: feature_center loaded from ./saved_models/latest.ckpt
+2019-05-17 08:39:18,883: INFO: [train_wsdan.py:151]: 
+Start training: Total epochs: 20, Batch size: 32, Training size: 265213, Validation size: 3030
+2019-05-17 08:40:02,101: INFO: [wsdan.py:82]: WSDAN: using inception as feature extractor
+2019-05-17 08:40:04,325: INFO: [wsdan.py:122]: WSDAN: All params loaded
+2019-05-17 08:40:04,379: INFO: [train_wsdan.py:103]: Network loaded from ./saved_models/latest.ckpt
+2019-05-17 08:40:04,394: INFO: [train_wsdan.py:110]: feature_center loaded from ./saved_models/latest.ckpt
+2019-05-17 08:40:05,498: INFO: [train_wsdan.py:151]: 
+Start training: Total epochs: 20, Batch size: 32, Training size: 265213, Validation size: 3030
+2019-05-17 08:41:50,276: INFO: [train_wsdan.py:466]: saving the best model from epoch 2
+2019-05-17 08:41:51,260: INFO: [train_wsdan.py:478]: Valid: Loss 1.84986,  Accuracy: Top-1 55.48, Top-3 76.13, Top-5 83.76, Time 104.67
+2019-05-17 08:43:17,111: INFO: [train_wsdan.py:466]: saving the best model from epoch 3
+2019-05-17 08:43:18,338: INFO: [train_wsdan.py:478]: Valid: Loss 1.84986,  Accuracy: Top-1 55.48, Top-3 76.13, Top-5 83.76, Time 85.75
+2019-05-17 08:44:43,455: INFO: [train_wsdan.py:466]: saving the best model from epoch 4
+2019-05-17 08:44:43,761: INFO: [train_wsdan.py:478]: Valid: Loss 1.84986,  Accuracy: Top-1 55.48, Top-3 76.13, Top-5 83.76, Time 85.02
+2019-05-17 08:46:08,881: INFO: [train_wsdan.py:466]: saving the best model from epoch 5
+2019-05-17 08:46:09,185: INFO: [train_wsdan.py:478]: Valid: Loss 1.84986,  Accuracy: Top-1 55.48, Top-3 76.13, Top-5 83.76, Time 85.02
+2019-05-17 08:47:34,293: INFO: [train_wsdan.py:466]: saving the best model from epoch 6
+2019-05-17 08:47:34,597: INFO: [train_wsdan.py:478]: Valid: Loss 1.84986,  Accuracy: Top-1 55.48, Top-3 76.13, Top-5 83.76, Time 85.01
+2019-05-17 08:50:36,872: INFO: [wsdan.py:82]: WSDAN: using inception as feature extractor
+2019-05-17 08:50:41,272: INFO: [wsdan.py:122]: WSDAN: All params loaded
+2019-05-17 08:50:41,324: INFO: [train_wsdan.py:103]: Network loaded from ./saved_models/latest.ckpt
+2019-05-17 08:50:41,338: INFO: [train_wsdan.py:110]: feature_center loaded from ./saved_models/latest.ckpt
+2019-05-17 08:50:43,050: INFO: [train_wsdan.py:151]: 
+Start training: Total epochs: 20, Batch size: 32, Training size: 265213, Validation size: 3030
+2019-05-17 08:50:43,050: INFO: [train_wsdan.py:217]: Epoch 002, Learning Rate 0.001
+2019-05-17 08:57:05,782: INFO: [train_wsdan.py:327]: 
+	Batch 100: (Raw) Loss 1.1793, Accuracy: (70.12, 86.25, 91.84), (Crop) Loss 1.5188, Accuracy: (60.25, 78.53, 85.22), (Drop) Loss 2.3771, Accuracy: (47.50, 64.25, 70.94), Time 3.37
+2019-05-17 09:22:39,829: INFO: [wsdan.py:82]: WSDAN: using inception as feature extractor
+2019-05-17 09:22:42,608: INFO: [wsdan.py:122]: WSDAN: All params loaded
+2019-05-17 09:22:42,670: INFO: [train_wsdan.py:103]: Network loaded from ./saved_models/latest.ckpt
+2019-05-17 09:22:42,692: INFO: [train_wsdan.py:110]: feature_center loaded from ./saved_models/latest.ckpt
+2019-05-17 09:22:43,783: INFO: [train_wsdan.py:151]: 
+Start training: Total epochs: 20, Batch size: 32, Training size: 265213, Validation size: 3030
+2019-05-17 09:22:43,783: INFO: [train_wsdan.py:219]: Epoch 002, Learning Rate 0.001

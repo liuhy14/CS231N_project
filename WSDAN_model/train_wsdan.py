@@ -79,8 +79,8 @@ def main():
 
     feature_net = inception_v3(pretrained=True)
     net = WSDAN(num_classes=num_classes, M=num_attentions, net=feature_net)
-    optimizer = torch.optim.Adam(net.parameters())
-    # optimizer = torch.optim.SGD(net.parameters(), lr=options.lr, momentum=0.9, weight_decay=0.00001)
+    # optimizer = torch.optim.Adam(net.parameters())
+    optimizer = torch.optim.SGD(net.parameters(), lr=options.lr, momentum=0.9, weight_decay=0.00001)
     loss = nn.CrossEntropyLoss()
 
     # feature_center: size of (#classes, #attention_maps, #channel_features)
@@ -141,8 +141,8 @@ def main():
     ##################################
     # Learning rate scheduling
     ##################################
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, patience=2)
-    # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=2, gamma=0.9)
+    #scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, patience=2)
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=2, gamma=0.9)
 
     ##################################
     # TRAINING
@@ -151,7 +151,7 @@ def main():
                  format(options.epochs, options.batch_size, len(train_dataset), len(validate_dataset)))
 
     for epoch in range(start_epoch, options.epochs):
-        '''step = train(epoch=epoch,
+        step = train(epoch=epoch,
               step=step,
               batch_size=options.batch_size,
               data_loader=train_loader,
@@ -164,16 +164,19 @@ def main():
               save_dir=options.save_dir,
               verbose=options.verbose,
               tbx=tbx,
-              val_data_loader=validate_loader)'''
-        '''validate(epoch=epoch,
+              val_data_loader=validate_loader,
+              scheduler=scheduler)
+        validate(epoch=epoch,
                 data_loader=validate_loader,
                 net=net,
                 feature_center=feature_center,
                 loss=loss,
+                step=step,
+                optimizer=optimizer,
                 save_dir=options.save_dir,
                 verbose=options.verbose,
-                tbx=tbx)'''
-        scheduler.step()
+                tbx=tbx)
+        #scheduler.step()
 
 
 def train(**kwargs):
@@ -192,6 +195,7 @@ def train(**kwargs):
     tbx = kwargs['tbx']
     val_data_loader = kwargs['val_data_loader']
     validate_freq = kwargs['validate_freq']
+    scheduler = kwargs['scheduler'];
     global best_top1_val_accuracy
 
     # Attention Regularization: LA Loss
@@ -330,6 +334,7 @@ def train(**kwargs):
             state_dict = net.module.state_dict()
             for key in state_dict.keys():
                 state_dict[key] = state_dict[key].cpu()
+            scheduler.step()
 
             torch.save({
                 'epoch': epoch,
@@ -341,6 +346,7 @@ def train(**kwargs):
                 'optimizer' : optimizer.state_dict()},
                 os.path.join(save_dir, 'latest.ckpt'))
 
+        if (i + 1) % validate_freq == 0:
             validate(epoch=epoch,
                      step=step,
                      data_loader=val_data_loader,
