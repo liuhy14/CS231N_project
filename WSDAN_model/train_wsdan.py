@@ -137,7 +137,7 @@ def main():
     ##################################
     # Learning rate scheduling
     ##################################
-    # scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, patience=2)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, factor=0.5, patience=2)
     # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=2, gamma=0.9)
 
     ##################################
@@ -147,7 +147,7 @@ def main():
                  format(options.epochs, options.batch_size, len(train_dataset), len(validate_dataset)))
 
     for epoch in range(start_epoch, options.epochs):
-        step = train(epoch=epoch,
+        '''step = train(epoch=epoch,
               step=step,
               batch_size=options.batch_size,
               data_loader=train_loader,
@@ -159,7 +159,7 @@ def main():
               save_dir=options.save_dir,
               verbose=options.verbose,
               tbx=tbx,
-              val_data_loader=validate_loader)
+              val_data_loader=validate_loader)'''
         '''validate(epoch=epoch,
                 data_loader=validate_loader,
                 net=net,
@@ -168,7 +168,7 @@ def main():
                 save_dir=options.save_dir,
                 verbose=options.verbose,
                 tbx=tbx)'''
-        # scheduler.step()
+        scheduler.step()
 
 
 def train(**kwargs):
