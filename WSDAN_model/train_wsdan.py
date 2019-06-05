@@ -15,6 +15,7 @@ import torch.backends.cudnn as cudnn
 from torch.utils.data import DataLoader
 from optparse import OptionParser
 from tensorboardX import SummaryWriter
+from torch.utils.data import WeightedRandomSampler
 
 from utils import accuracy
 from models import *
@@ -37,19 +38,19 @@ def main():
     global best_top1_val_accuracy
 
     parser = OptionParser()
-    parser.add_option('-j', '--workers', dest='workers', default=8, type='int',
+    parser.add_option('-j', '--workers', dest='workers', default=4, type='int',
                       help='number of data loading workers (default: 16)')
     parser.add_option('-e', '--epochs', dest='epochs', default=20, type='int',
                       help='number of epochs (default: 20)')
-    parser.add_option('-b', '--batch-size', dest='batch_size', default=32, type='int',
+    parser.add_option('-b', '--batch-size', dest='batch_size', default=128, type='int',
                       help='batch size (default: 64)')
     parser.add_option('-c', '--ckpt', dest='ckpt', default= './saved_models/latest.ckpt',
                       help='load checkpoint model (default: ./saved_models/latest.ckpt)')
     parser.add_option('-v', '--verbose', dest='verbose', default=100, type='int',
                       help='show information for each <verbose> iterations (default: 100)')
 
-    parser.add_option('--lr', '--learning-rate', dest='lr', default=1e-3, type='float',
-                      help='learning rate (default: 1e-3)')
+    parser.add_option('--lr', '--learning-rate', dest='lr', default=1e-5, type='float',
+                      help='learning rate (default: 1e-5)')
     parser.add_option('--sf', '--save-freq', dest='save_freq', default=1000, type='int',
                       help='saving frequency of .ckpt models (default: 1000)')
     parser.add_option('--sd', '--save-dir', dest='save_dir', default='./saved_models',
@@ -128,12 +129,23 @@ def main():
     # Load dataset
     ##################################
 
-
+    
+    
     train_dataset, validate_dataset = INAT(data_root, train_file, image_size, is_train=True), \
                                       INAT(data_root, val_file, image_size, is_train=False)
+    
+    #Balanced sampling from all classes
+    num_classes = len(set(train_dataset.classes))
+    class_count = []
+    for i in range(num_classes):
+        class_count.append(train_dataset.classes.count(i))
+    total = sum(class_count)
+    weights = []
+    for i in range(len(train_dataset.imgs)):
+        weights.append(1/class_count[train_dataset.classes[i]])
+    trainSampler = WeightedRandomSampler(weights = weights,num_samples = 265213)
 
-    train_loader, validate_loader = DataLoader(train_dataset, batch_size=options.batch_size, shuffle=True,
-                                               num_workers=options.workers, pin_memory=True), \
+    train_loader, validate_loader = DataLoader(train_dataset, batch_size=options.batch_size, sampler = trainSampler, shuffle=False, num_workers=options.workers, pin_memory=True), \
                                     DataLoader(validate_dataset, batch_size=options.batch_size, shuffle=False,
                                                num_workers=options.workers, pin_memory=True)
 
@@ -335,7 +347,7 @@ def train(**kwargs):
             state_dict = net.module.state_dict()
             for key in state_dict.keys():
                 state_dict[key] = state_dict[key].cpu()
-            scheduler.step()
+            #scheduler.step()
 
             torch.save({
                 'epoch': epoch,

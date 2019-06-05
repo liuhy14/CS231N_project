@@ -114,7 +114,7 @@ class INAT(data.Dataset):
         img = self.tensor_aug(img)
         img = self.norm_aug(img)
         '''
-        return img, im_id, species_id, tax_ids
+        return img, im_id, species_id, self.imgs[index]
 
     def __len__(self):
         return len(self.imgs)
